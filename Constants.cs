@@ -13,6 +13,21 @@ namespace StoryOrganizer
         public const char C_SELECTION = 'C';
         public const char D_SELECTION = 'D';
 
+        public const int CHILD_LOW = 1;
+        public const int CHILD_HIGH = 12;
+
+        public const int TEENAGER_LOW = 13;
+        public const int TEENAGER_HIGH = 19;
+
+        public const int YOUNG_ADULT_LOW = 20;
+        public const int YOUNG_ADULT_HIGH = 38;
+
+        public const  int MIDDLE_AGE_ADULT_LOW = 39;
+        public static int MIDDLE_AGE_ADULT_MID = 45;
+        public static int MIDDLE_AGE_ADULT_HIGH = 58;
+
+
+
 
     }
 }
