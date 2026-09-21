@@ -13,9 +13,9 @@ namespace StoryOrganizer
             Console.WriteLine("Welcome to StoryOrganizer");
         }
 
+        //used to display categories to the user
         static public void DisplayCategories()
         {
-
             //StoryCategory category = new StoryCategory();
             StoryCategory.storyCategories.Add("fantacy");
             StoryCategory.storyCategories.Add("SCI-Fi");
@@ -29,7 +29,7 @@ namespace StoryOrganizer
             }
         }
 
-       public static char UserSelection()
+        public static char UserSelection()
         {
             char userSelection = Console.ReadKey().KeyChar;
             return userSelection;
@@ -42,7 +42,7 @@ namespace StoryOrganizer
             return validateUserEntry;
         }
 
-        // this is the selection for the user 
+        // this is the DisplayCategories() for the user 
         public static void PrintWhatTheUserSelected(int userInput)
         {
             switch (userInput)
@@ -54,26 +54,53 @@ namespace StoryOrganizer
 
                 case Constants.B_SELECTION:
                     Console.WriteLine($"You have selected {userInput}");
-                    
+
                     break;
 
                 case Constants.C_SELECTION:
                     Console.WriteLine($"You have selected {userInput}");
-                   
+
                     break;
                 case Constants.D_SELECTION:
                     Console.WriteLine($"You have selected {userInput}");
-                    
+
                     break;
-               
+
                 default:
                     Console.WriteLine("Invalid selection.");
-                    
+
                     break;
             }
         }
+        static string CharacterGoalInput()
+        {
+            string mainCharacterGoal = "";
+            return mainCharacterGoal;
+        }
+
+        public static void AskAboutMainCharacter()
+        {
+            Console.WriteLine("What is the age of the Main Character?");
+
+            StoryCategory.MainCharcterAttibutes.Add("Age");
+
+            Console.WriteLine("What is the main character's Personality like?");
+
+            StoryCategory.MainCharcterAttibutes.Add("personailty");
 
 
+            StoryCategory.MainCharcterAttibutes.Add("height");
+
+
+            StoryCategory.MainCharcterAttibutes.Add("weight");
+            StoryCategory.MainCharcterAttibutes.Add("Occuaption");
+
+            Console.WriteLine("What is the main Charcters goals");
+
+            string goalInput = CharacterGoalInput();
+
+            StoryCategory.MainCharctersGoals.Add($"{goalInput}");
+        }
 
     }
 }
