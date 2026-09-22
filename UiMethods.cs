@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace StoryOrganizer
@@ -12,6 +13,7 @@ namespace StoryOrganizer
         {
             Console.WriteLine("Welcome to StoryOrganizer");
         }
+
         static string CharacterGoalInput()
         {
             string mainCharacterGoal = "";
@@ -28,25 +30,22 @@ namespace StoryOrganizer
             char userSelection = Console.ReadKey().KeyChar;
             return userSelection;
         }
-        //refernece to UserSlection 
-        public static char ValidateUserSelection()
+        //used to select DisplayCatergory number 
+        public static char ValidateUserSelection(char validateUserEntry)
         {
-            char validateUserEntry = UserSelection();
-            validateUserEntry = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
+            char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
             return validateUserEntry;
         }
 
-
-
-        //used to display categories to the user
+        //used to display categories to the user.
         static public void DisplayCategories()
         {
-            //StoryCategory category = new StoryCategory();
-            StoryCategory.storyCategories.Add("fantacy");
-            StoryCategory.storyCategories.Add("SCI-Fi");
-            StoryCategory.storyCategories.Add("True Story");
-            StoryCategory.storyCategories.Add("Horror");
-            StoryCategory.storyCategories.Add("Anime"); // might change this.
+            Console.WriteLine("Select your genre.");
+
+            StoryCategory.storyCategories.Add("A: fantacy");
+            StoryCategory.storyCategories.Add("B: SCI-Fi");
+            StoryCategory.storyCategories.Add("C: True Story");
+            StoryCategory.storyCategories.Add("D: Horror");
 
             foreach (string item in StoryCategory.storyCategories)
             {
@@ -55,12 +54,12 @@ namespace StoryOrganizer
         }
 
         // this is the DisplayCategories() for the user 
-        public static void PrintWhatTheUserSelected(int userInput)
+        public static void PrintWhatTheUserSelected(char userInput)
         {
             switch (userInput)
             {
                 case Constants.A_SELECTION:
-                    Console.WriteLine($"You have selected {userInput}:");
+                    Console.WriteLine($"You have selected : {userInput}:");
 
                     break;
 
@@ -84,6 +83,7 @@ namespace StoryOrganizer
                     break;
             }
         }
+
 
         public static void AskAboutMainCharacter()
         {

@@ -15,7 +15,7 @@ namespace StoryOrganizer
 
             if (input < ConstantInput)
             {
-                // add message from UiMethods?
+               
             }
 
             else if (input > ConstantInput)
@@ -30,4 +30,6 @@ namespace StoryOrganizer
             return age; 
         }
     }
+
+
 }
