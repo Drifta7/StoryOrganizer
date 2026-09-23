@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace StoryOrganizer
 {
     // this is where the user will store their ideas with no reservations.
-   static public class BrainStormDump
+    public class BrainStormDump
     {
-        static string UserBrainDump = "null";
-
+        public string Content { get; set; }
     }
+
 }

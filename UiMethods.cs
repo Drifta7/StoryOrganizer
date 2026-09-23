@@ -14,6 +14,17 @@ namespace StoryOrganizer
             Console.WriteLine("Welcome to StoryOrganizer");
         }
 
+        static public string AskUserQuestion()
+        {
+            Console.WriteLine("What is your Idea that you like to put out?");
+            string UserAnswer = Console.ReadLine();
+            return UserAnswer;
+        }
+
+        static public void DisplayUserAnswer(string userAnswer)
+        {
+            Console.WriteLine(userAnswer);
+        }
         static string CharacterGoalInput()
         {
             string mainCharacterGoal = "";
@@ -33,8 +44,8 @@ namespace StoryOrganizer
         //used to select DisplayCatergory number 
         public static char ValidateUserSelection(char validateUserEntry)
         {
-            char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
-            return validateUserEntry;
+            char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
+            return upperChar;
         }
 
         //used to display categories to the user.
@@ -83,7 +94,6 @@ namespace StoryOrganizer
                     break;
             }
         }
-
 
         public static void AskAboutMainCharacter()
         {
