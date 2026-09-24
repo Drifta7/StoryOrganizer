@@ -8,7 +8,14 @@ namespace StoryOrganizer
 {
     internal class Logic
     {
-        static public int AgeLogicCalculator(int input , int ConstantInput) // age less or equal to OR greater than
+        public static char ValidateUserYesNo()
+        {
+            char yesOrNoAnswer = Console.ReadKey().KeyChar;
+            char.ToUpper(yesOrNoAnswer);
+            return yesOrNoAnswer;
+        }
+       
+        public static int AgeLogicCalculator(int input , int ConstantInput) // age less or equal to OR greater than
         {
             int age = 0;
             age = input;

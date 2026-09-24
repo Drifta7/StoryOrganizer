@@ -12,5 +12,4 @@ namespace StoryOrganizer
     {
         public string Content { get; set; }
     }
-
 }

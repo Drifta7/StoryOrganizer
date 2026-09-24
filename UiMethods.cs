@@ -9,23 +9,28 @@ namespace StoryOrganizer
 {
     public class UiMethods
     {
-        static public void UserGreeting()
+        public static void UserGreeting()
         {
             Console.WriteLine("Welcome to StoryOrganizer");
         }
 
-        static public string AskUserQuestion()
+        public static string AskUserQuestion()
         {
             Console.WriteLine("What is your Idea that you like to put out?");
             string UserAnswer = Console.ReadLine();
             return UserAnswer;
         }
 
-        static public void DisplayUserAnswer(string userAnswer)
+        public static void AskIfUserIsDoneQuestion()
+        {
+            Console.WriteLine("Is user Done Brainstroming?");
+        }
+
+        public static void DisplayUserAnswer(string userAnswer)
         {
             Console.WriteLine(userAnswer);
         }
-        static string CharacterGoalInput()
+        public static string CharacterGoalInput()
         {
             string mainCharacterGoal = "";
             return mainCharacterGoal;
@@ -49,7 +54,7 @@ namespace StoryOrganizer
         }
 
         //used to display categories to the user.
-        static public void DisplayCategories()
+        public static void DisplayCategories()
         {
             Console.WriteLine("Select your genre.");
 
@@ -99,19 +104,19 @@ namespace StoryOrganizer
         {
             Console.WriteLine("What is the age of the Main Character?");
 
-            StoryCategory.mainCharcterAttibutes.Add("Age");
+            StoryCategory.mainCharcterAttributes.Add("Age");
             int age = NumberedUserInput();
 
             Console.WriteLine("What is the main character's Personality like?");
 
-            StoryCategory.mainCharcterAttibutes.Add("personailty");
+            StoryCategory.mainCharcterAttributes.Add("personailty");
 
 
-            StoryCategory.mainCharcterAttibutes.Add("height");
+            StoryCategory.mainCharcterAttributes.Add("height");
 
 
-            StoryCategory.mainCharcterAttibutes.Add("weight");
-            StoryCategory.mainCharcterAttibutes.Add("Occuaption");
+            StoryCategory.mainCharcterAttributes.Add("weight");
+            StoryCategory.mainCharcterAttributes.Add("Occuaption");
 
             Console.WriteLine("What is the main Charcters goals");
 
@@ -119,7 +124,7 @@ namespace StoryOrganizer
 
             StoryCategory.mainCharctersGoals.Add($"{goalInput}");
 
-            foreach (var item in StoryCategory.mainCharcterAttibutes)
+            foreach (var item in StoryCategory.mainCharcterAttributes)
             {
                 Console.WriteLine(item);
             }

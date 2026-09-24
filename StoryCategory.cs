@@ -8,12 +8,21 @@ namespace StoryOrganizer
 {
     public class StoryCategory
     {
-        static public List<string> storyCategories = new List<string>();
-        static public List<string> mainCharcterAttibutes = new List<string>();
+        // might change this to a Plot class 
+        public string Category { get; set; }
 
-        static public List<string> mainCharctersGoals = new List<string>();
+        public static List<string> storyCategories = new List<string>();
+        public static List<string> mainCharcterAttributes = new List<string>();
+        public static List<string> mainCharctersGoals = new List<string>();
 
-        //public string Name { get; set; }
+        // user will get to choose either beginning, middle, end and work accordingly 
+        public string Beginning { get; set; } // start of the story
+        public string Middle { get; set; } // where the story developes, meat and potatoes of the story 
+        public string Ending { get; set; } // where the stroy closes 
+
+        public string Climax { get; set; } // where the story may peak 
+        public string PotentialPlotTwist { get; set; } // to "spice" up the story
+
 
     }
 }

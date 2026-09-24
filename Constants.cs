@@ -22,11 +22,12 @@ namespace StoryOrganizer
         public const int YOUNG_ADULT_LOW = 20;
         public const int YOUNG_ADULT_HIGH = 38;
 
-        public const  int MIDDLE_AGE_ADULT_LOW = 39;
-        public static int MIDDLE_AGE_ADULT_MID = 45;
-        public static int MIDDLE_AGE_ADULT_HIGH = 58;
+        public const int MIDDLE_AGE_ADULT_LOW = 39;
+        public const int MIDDLE_AGE_ADULT_MID = 45;
+        public const int MIDDLE_AGE_ADULT_HIGH = 58;
 
-
+        public const char _YES = 'y';
+        public const char _NO = 'n';
 
 
     }

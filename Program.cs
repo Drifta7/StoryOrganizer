@@ -4,6 +4,7 @@
     {
         static void Main(string[] args)
         {
+            bool isUserDoneBrainStorming = false;
 
             UiMethods.UserGreeting();
             UiMethods.DisplayCategories();
@@ -11,16 +12,36 @@
             char AnswerForCharacterSelection = UiMethods.ValidateUserSelection(UiMethods.UserSelection());
 
             UiMethods.PrintWhatTheUserSelected(AnswerForCharacterSelection);
+            char userYesOrNoAns = Logic.ValidateUserYesNo();
 
             BrainStormDump idea = new BrainStormDump();
 
-           // idea.Content = " the motorcycle has been stolen, and it was her fathers ride";
+            // idea.Content = " the motorcycle has been stolen, and it was her fathers ride";
 
-           // Console.WriteLine(idea.Content);
+            // Console.WriteLine(idea.Content);
 
             string userAnswer = UiMethods.AskUserQuestion();
             idea.Content = userAnswer;
             UiMethods.DisplayUserAnswer(idea.Content);
+
+            while (!isUserDoneBrainStorming)
+            {
+                UiMethods.AskIfUserIsDoneQuestion();
+
+                if (userYesOrNoAns == Constants._YES)
+                {
+                    // deciding if there should be a for loop for the amount of ideas that the user wants to put in
+                    // the user should dump a X number of ideas then the app ask are you finished ot not then asked  
+                    // the question whether they are or not
+
+                    isUserDoneBrainStorming = true;
+                }
+                else if (userYesOrNoAns == Constants._NO)
+                {
+                    continue;
+                }
+
+            }
 
             //UiMethods.AskAboutMainCharacter(); not sure I want to call this method just yet
         }
