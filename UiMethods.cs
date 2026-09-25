@@ -51,6 +51,8 @@ namespace StoryOrganizer
         {
             char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
             return upperChar;
+            Console.WriteLine(upperChar);
+            Console.WriteLine();
         }
 
         //used to display categories to the user.
@@ -102,29 +104,28 @@ namespace StoryOrganizer
 
         public static void AskAboutMainCharacter()
         {
+            Character characAtt = new Character(); // Character Class object
             Console.WriteLine("What is the age of the Main Character?");
 
-            StoryCategory.mainCharcterAttributes.Add("Age");
+            characAtt.CharacterAttributes.Add("Age");
             int age = NumberedUserInput();
 
             Console.WriteLine("What is the main character's Personality like?");
 
-            StoryCategory.mainCharcterAttributes.Add("personailty");
+            characAtt.CharacterAttributes.Add("personailty");
 
+            characAtt.CharacterAttributes.Add("height");
 
-            StoryCategory.mainCharcterAttributes.Add("height");
-
-
-            StoryCategory.mainCharcterAttributes.Add("weight");
-            StoryCategory.mainCharcterAttributes.Add("Occuaption");
+            characAtt.CharacterAttributes.Add("weight");
+            characAtt.CharacterAttributes.Add("Occuaption");
 
             Console.WriteLine("What is the main Charcters goals");
 
             string goalInput = CharacterGoalInput();
 
-            StoryCategory.mainCharctersGoals.Add($"{goalInput}");
+            characAtt.CharactersGoals.Add($"{goalInput}");
 
-            foreach (var item in StoryCategory.mainCharcterAttributes)
+            foreach (var item in characAtt.CharacterAttributes)
             {
                 Console.WriteLine(item);
             }

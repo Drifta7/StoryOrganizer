@@ -12,6 +12,5 @@ namespace StoryOrganizer
         // ideas to the story, most likey to be color coded and will be a visual aid and Part of the UI 
         public string markerCard { get; set; }
 
-
     }
 }
