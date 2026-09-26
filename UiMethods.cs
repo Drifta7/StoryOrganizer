@@ -14,27 +14,31 @@ namespace StoryOrganizer
             Console.WriteLine("Welcome to StoryOrganizer");
         }
 
-        public static string AskUserQuestion()
+        //asking about what the idea the user will put out
+        public static string AskUserAboutIdea()
         {
-            Console.WriteLine("What is your Idea that you like to put out?");
+            Console.WriteLine("What Idea(s) would you like to put out?");
             string UserAnswer = Console.ReadLine();
-            return UserAnswer;
+            return UserAnswer; // where the actual idea is stored
         }
-
+        //generic question
         public static void AskIfUserIsDoneQuestion()
         {
             Console.WriteLine("Is user Done Brainstroming?");
         }
 
+        // displays what the user has placed in userAnswer
         public static void DisplayUserAnswer(string userAnswer)
         {
             Console.WriteLine(userAnswer);
         }
+        //goals for the character... will put this into another method
         public static string CharacterGoalInput()
         {
             string mainCharacterGoal = "";
             return mainCharacterGoal;
         }
+        //used for age of character
         public static int NumberedUserInput()
         {
             int userInput = 0;
@@ -45,14 +49,6 @@ namespace StoryOrganizer
         {
             char userSelection = Console.ReadKey().KeyChar;
             return userSelection;
-        }
-        //used to select DisplayCatergory number 
-        public static char ValidateUserSelection(char validateUserEntry)
-        {
-            char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
-            return upperChar;
-            Console.WriteLine(upperChar);
-            Console.WriteLine();
         }
 
         //used to display categories to the user.
@@ -77,7 +73,7 @@ namespace StoryOrganizer
             switch (userInput)
             {
                 case Constants.A_SELECTION:
-                    Console.WriteLine($"You have selected : {userInput}:");
+                    Console.WriteLine($"You have selected : {userInput}");
 
                     break;
 
@@ -102,6 +98,7 @@ namespace StoryOrganizer
             }
         }
 
+        // this to fill out for the user characters and their attributes 
         public static void AskAboutMainCharacter()
         {
             Character characAtt = new Character(); // Character Class object

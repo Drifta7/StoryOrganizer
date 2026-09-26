@@ -12,5 +12,7 @@ namespace StoryOrganizer
     {
         public string Content { get; set; } // the content(raw random ideas) that the user will put into the field 
         public int BatchContentNum { get; set; } // this will note the batch number of dumps that the user will have 
+
+        public List<string> UserContent = new List<string>(); // list for the user Idea to be placed in.
     }
 }

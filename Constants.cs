@@ -26,8 +26,8 @@ namespace StoryOrganizer
         public const int MIDDLE_AGE_ADULT_MID = 45;
         public const int MIDDLE_AGE_ADULT_HIGH = 58;
 
-        public const char _YES = 'y';
-        public const char _NO = 'n';
+        public const char _YES = 'Y';
+        public const char _NO = 'N';
 
         public const int TIMES_USER_HAS_CREATED_IDEAS = 10;
     }
