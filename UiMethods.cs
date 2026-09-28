@@ -18,7 +18,7 @@ namespace StoryOrganizer
         public static string AskUserAboutIdea()
         {
             Console.WriteLine("What Idea(s) would you like to put out?");
-            string UserAnswer = Console.ReadLine();
+            string? UserAnswer = Console.ReadLine();
             return UserAnswer; // where the actual idea is stored
         }
         //generic question

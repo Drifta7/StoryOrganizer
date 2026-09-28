@@ -10,9 +10,16 @@ namespace StoryOrganizer
     // this is where the user will store their ideas with no reservations.
     public class BrainStormDump
     {
-        public string Content { get; set; } // the content(raw random ideas) that the user will put into the field 
-        public int BatchContentNum { get; set; } // this will note the batch number of dumps that the user will have 
-
-        public List<string> UserContent = new List<string>(); // list for the user Idea to be placed in.
+        public string? Content { get; set; } // the content(raw random ideas) that the user will put into the field 
+       
+        public int BatchContentNumber { get; set; } // this will note the batch number of dumps that the user will have 
+        public List<string> DumpArea { get; set; }
+        
+       
+        
+        public BrainStormDump()
+        {
+             DumpArea = new List<string>();
+        }
     }
 }

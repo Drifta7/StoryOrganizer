@@ -11,11 +11,11 @@ namespace StoryOrganizer
         public List<string> SupportingCast = new List<string>();
         public List<string> CharacterAttributes = new List<string>();
         public List<string> CharactersGoals = new List<string>();
-        public string characterAttributes { get; set; }
-        public string Name;
-        public string Height;
-        public int Age;
-        public string Residency;
+        public string? characterAttributes { get; set; }
+        public string? Name;
+        public string? Height;
+        public int? Age;
+        public string? Residency;
 
         // Character.Name = new Charcter();
     }

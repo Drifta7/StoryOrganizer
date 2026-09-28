@@ -8,6 +8,8 @@ namespace StoryOrganizer
 {
    public  class Plot
     {
+        private string _plot;
+
         // user will get to choose either beginning, middle, end and work accordingly 
        
         public string Beginning { get; set; } // start of the story
@@ -16,7 +18,6 @@ namespace StoryOrganizer
 
         public string Climax { get; set; } // where the story may peak 
         public string PotentialPlotTwist { get; set; } // to "spice" up the story
-
 
     }
 }

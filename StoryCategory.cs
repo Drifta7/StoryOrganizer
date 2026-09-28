@@ -9,7 +9,17 @@ namespace StoryOrganizer
     public class StoryCategory
     {
         // might change this to a Plot class 
-        public string Category { get; set; }
+        private string _category { get; set; } // field 
+
+        public string Category 
+        {
+            get { return _category; }
+            set
+            {
+                List<string> List = new List<string>();
+            }
+        }
+
 
         public static List<string> storyCategories = new List<string>();
         

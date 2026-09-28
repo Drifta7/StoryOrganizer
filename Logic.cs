@@ -8,7 +8,7 @@ namespace StoryOrganizer
 {
     internal class Logic
     {
-        public static char ValidateUserYesNo()
+        public static char ValidateUserAnswerToYesNo()
         {
             bool isUserAnsEitherYOrN = false;
             char yesOrNoAnswer = char.ToUpper(Console.ReadKey().KeyChar);
