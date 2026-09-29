@@ -17,14 +17,38 @@ namespace StoryOrganizer
         //asking about what the idea the user will put out
         public static string AskUserAboutIdea()
         {
-            Console.WriteLine("What Idea(s) would you like to put out?");
+            Console.WriteLine("What Idea(s) would you like to put out?\n");
             string? UserAnswer = Console.ReadLine();
             return UserAnswer; // where the actual idea is stored
         }
-        //generic question
+        public static int SelectOrganizerMode()
+        {
+            int UserInput = 0;
+            return UserInput;
+        }
+
+        // might use this for mode when constructing story user mode
+        public static int ValidateSelectionMode(int userSelection)
+        {
+            bool isUserSelectionValid = false;
+            do
+            {
+                if (userSelection != Constants.BRAIN_DUMP_MODE_SELECTION && userSelection != Constants.CREATING_PLOT_MODE
+                    && userSelection != Constants.CREATING_TAGS_ID_CARDS)
+                {
+                    Console.WriteLine($"This {userSelection} is not the correct choice, please choose from the list\n");
+                    //here add the list (subject to change)
+                }
+                else
+                    isUserSelectionValid = true;
+            }
+            while (!isUserSelectionValid);
+            return userSelection;
+        }
+
         public static void AskIfUserIsDoneQuestion()
         {
-            Console.WriteLine("Is user Done Brainstroming?");
+            Console.WriteLine("Is user Done Brainstroming?\n");
         }
 
         // displays what the user has placed in userAnswer

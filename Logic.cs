@@ -12,7 +12,7 @@ namespace StoryOrganizer
         {
             bool isUserAnsEitherYOrN = false;
             char yesOrNoAnswer = char.ToUpper(Console.ReadKey().KeyChar);
-            //char.ToUpper(yesOrNoAnswer);
+           
             do
             {
                 if (yesOrNoAnswer != Constants._YES && yesOrNoAnswer != Constants._NO)
@@ -49,10 +49,6 @@ namespace StoryOrganizer
             return upperChar;
         }
 
-        public void AccessToIdeas()
-        {
-            
-        }
         public static int AgeLogicCalculator(int input, int ConstantInput) // age less or equal to OR greater than
         {
             int age = 0;
@@ -75,6 +71,4 @@ namespace StoryOrganizer
             return age;
         }
     }
-
-
 }
