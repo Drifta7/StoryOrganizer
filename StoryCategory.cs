@@ -13,8 +13,8 @@ namespace StoryOrganizer
 
         public string Category 
         {
-            get { return _category; }
-            set
+            get { return _category; } //reads 
+            set // writes
             {
                 List<string> List = new List<string>();
             }

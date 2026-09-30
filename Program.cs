@@ -19,23 +19,16 @@ namespace StoryOrganizer
 
             BrainStormDump idea = new BrainStormDump();
 
-            // idea.Content = " the motorcycle has been stolen, and it was her fathers ride"; // example
-
-            // BrainStormDump UserIdeas = new BrainStormDump(); // for ideas
-
-            //UserIdeas.DumpArea.Add(""); // where the user manually puts in ideas
-            // how do you create a dyanamic list where the user adds as much ideas as they want?
-
-            // this is where the user puts in their ideas that is save to a variable.
-            //UiMethods.DisplayUserAnswer(idea.Content);
-
-           
+            BrainDumpManager passOn = new BrainDumpManager();
 
             while (!isUserDoneBrainStorming)
             {
                 //Adds to the User Ideas to a list when Brainstorming
+                BrainStormDump dumpEntry = new BrainStormDump();
 
+                dumpEntry.DumpArea.Add(UiMethods.AskUserAboutIdea());
 
+                passOn.AddBrainDump(dumpEntry);
 
                 UiMethods.AskIfUserIsDoneQuestion();
                 char userYesOrNoAns = Logic.ValidateUserAnswerToYesNo();
@@ -54,7 +47,7 @@ namespace StoryOrganizer
                 }
             }
 
-            foreach (var item in BrainDumpList)
+            foreach (var item in passOn.GetList())
             {
                 foreach (var List in item.DumpArea)
                 {
