@@ -18,7 +18,6 @@ namespace StoryOrganizer
             UiMethods.PrintWhatTheUserSelected(AnswerForCharacterSelection);
 
             BrainStormDump idea = new BrainStormDump();
-
             BrainDumpManager passOn = new BrainDumpManager();
 
             while (!isUserDoneBrainStorming)

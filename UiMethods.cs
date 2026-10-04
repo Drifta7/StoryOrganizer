@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
@@ -121,6 +122,19 @@ namespace StoryOrganizer
                     break;
             }
         }
+        BrainDumpManager getDumpList = new BrainDumpManager();
+
+        public void DisplayingTheBrainDumps()
+        {
+            int IndexedNumber = 0;
+
+            for (int i = 0; i < getDumpList.GetList().Count; i++)
+            {
+
+                
+            }
+        }
+
 
         // this to fill out for the user characters and their attributes 
         public static void AskAboutMainCharacter()

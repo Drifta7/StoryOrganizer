@@ -19,9 +19,9 @@ namespace StoryOrganizer
                 List<string> List = new List<string>();
             }
         }
+        public static List<string> multiGenreStory = new List<string>(); //for if stories have more than one genre  
 
-
-        public static List<string> storyCategories = new List<string>();
-        
+        public static List<string> storyCategories = new List<string>(); // this will be for selecting more than one category
+                                                                        // already in UiMethods
     }
 }
