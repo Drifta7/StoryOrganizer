@@ -20,7 +20,7 @@ namespace StoryOrganizer
         {
             Console.WriteLine("What Idea(s) would you like to put out?\n");
             string? UserAnswer = Console.ReadLine();
-            return UserAnswer; // where the actual idea is stored
+            return UserAnswer; 
         }
         public static int SelectOrganizerMode()
         {
@@ -123,15 +123,18 @@ namespace StoryOrganizer
             }
         }
         BrainDumpManager getDumpList = new BrainDumpManager();
+        BrainStormDump dump = new BrainStormDump();
 
         public void DisplayingTheBrainDumps()
         {
-            int IndexedNumber = 0;
+            int indexedNumber = 0;
 
-            for (int i = 0; i < getDumpList.GetList().Count; i++)
+            for (int i = 0; i < getDumpList.GetList().Count; i++) // 
             {
-
-                
+                for (int j = 0; j < dump.DumpArea.Count ; i++ )
+                {
+                    //create later
+                }
             }
         }
 
@@ -165,7 +168,6 @@ namespace StoryOrganizer
                 Console.WriteLine(item);
             }
         }
-
     }
 }
 

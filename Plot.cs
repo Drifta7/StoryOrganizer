@@ -43,6 +43,5 @@ namespace StoryOrganizer
             set { _plot = value; }
         }
 
-
     }
 }

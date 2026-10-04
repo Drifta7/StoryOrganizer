@@ -35,8 +35,6 @@ namespace StoryOrganizer
                 if (userYesOrNoAns == Constants._NO)
                 {
                     continue;
-                    //string userAnswer = UiMethods.AskUserAboutIdea();  
-                    //idea.Content = userAnswer;// this is where the user types up the potential idea dump,
                 }
 
                 else if (userYesOrNoAns == Constants._YES)
@@ -54,7 +52,7 @@ namespace StoryOrganizer
                 }
             }
 
-            //UiMethods.AskAboutMainCharacter(); //not sure I want to call this method just yet
+            UiMethods.AskAboutMainCharacter(); //not sure I want to call this method just yet
         }
     }
 }

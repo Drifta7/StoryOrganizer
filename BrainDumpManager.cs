@@ -12,10 +12,10 @@ namespace StoryOrganizer
 
         public void AddBrainDump(BrainStormDump dump)
         {
-            BrainStormDump BrainDumpEntry = new BrainStormDump(); //object/blueprint of BrainStromDump Class
+            BrainStormDump BrainDumpAreaEntry = new BrainStormDump(); //object/blueprint of BrainStromDump Class
             
-            BrainDumpEntry.DumpArea.Add(UiMethods.AskUserAboutIdea()); //adds AskUserAboutIdea return value to DumpArea in the class
-            BrainDumpList.Add(BrainDumpEntry); // adds User Entry to the BrainDumplist
+            BrainDumpAreaEntry.DumpArea.Add(UiMethods.AskUserAboutIdea()); //adds AskUserAboutIdea return value to DumpArea in the class
+            BrainDumpList.Add(BrainDumpAreaEntry); // adds User Entry to the BrainDumplist
         }
 
         public List<BrainStormDump> GetList() // get the list from passOn object in that Main()
