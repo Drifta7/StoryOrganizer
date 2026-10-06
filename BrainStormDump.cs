@@ -15,9 +15,10 @@ namespace StoryOrganizer
         public int BatchContentNumber { get; set; } // this will note the batch number of dumps that the user will have 
         public List<string> DumpArea { get; set; }
         
-        public BrainStormDump()
+        public BrainStormDump() // construtor
         {
              DumpArea = new List<string>();
+            // might have to make more properties so 
         }
     }
 }

@@ -17,15 +17,22 @@ namespace StoryOrganizer
 
             UiMethods.PrintWhatTheUserSelected(AnswerForCharacterSelection);
 
+            // here create a method that asked the question about the selection that the user picked
+            //psudeoMethodHere();
+
             BrainStormDump idea = new BrainStormDump();
             BrainDumpManager passOn = new BrainDumpManager();
+
+            int UserSelectionMode = UiMethods.UserModeSelection();
+
+            //if (UserSelectionMode == Constants.BRAIN_DUMP_MODE_SELECTION) { }
+            //if (UserSelectionMode == Constants.CREATING_PLOT_MODE) { }
+            //if (UserSelectionMode == Constants.BRAIN_DUMP_MODE_SELECTION) { }
 
             while (!isUserDoneBrainStorming)
             {
                 //Adds to the User Ideas to a list when Brainstorming
                 BrainStormDump dumpEntry = new BrainStormDump();
-
-                dumpEntry.DumpArea.Add(UiMethods.AskUserAboutIdea());
 
                 passOn.AddBrainDump(dumpEntry);
 
@@ -39,6 +46,7 @@ namespace StoryOrganizer
 
                 else if (userYesOrNoAns == Constants._YES)
                 {
+                   
                     isUserDoneBrainStorming = true;
                     //user Exits the session 
                 }
@@ -52,7 +60,8 @@ namespace StoryOrganizer
                 }
             }
 
-            UiMethods.AskAboutMainCharacter(); //not sure I want to call this method just yet
+            UiMethods.DisplayingTheBrainDumps(passOn);
+            //UiMethods.AskAboutMainCharacter(); //not sure I want to call this method just yet
         }
     }
 }

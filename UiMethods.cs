@@ -15,18 +15,32 @@ namespace StoryOrganizer
             Console.WriteLine("Welcome to StoryOrganizer");
         }
 
-        //asking about what the idea the user will put out
+        public static int UserModeSelection()
+        {
+            Console.WriteLine(" Create a Story Select a Mode");
+            int UserModeSelection = 0;
+            return UserModeSelection;
+        }
+
         public static string AskUserAboutIdea()
         {
             Console.WriteLine("What Idea(s) would you like to put out?\n");
             string? UserAnswer = Console.ReadLine();
-            return UserAnswer; 
+            return UserAnswer;
         }
         public static int SelectOrganizerMode()
         {
             int UserInput = 0;
             return UserInput;
         }
+
+        public static char AskingUserToAddAags()
+        {
+            Console.WriteLine("Do you want to add a Tag?");
+            char userSelection = 'a';
+            return userSelection;
+        }
+
 
         // might use this for mode when constructing story user mode
         public static int ValidateSelectionMode(int userSelection)
@@ -81,7 +95,7 @@ namespace StoryOrganizer
         {
             Console.WriteLine("Select your genre.");
 
-            StoryCategory.storyCategories.Add("A: fantacy");
+            StoryCategory.storyCategories.Add("A: fantasy");
             StoryCategory.storyCategories.Add("B: SCI-Fi");
             StoryCategory.storyCategories.Add("C: True Story");
             StoryCategory.storyCategories.Add("D: Horror");
@@ -98,21 +112,21 @@ namespace StoryOrganizer
             switch (userInput)
             {
                 case Constants.A_SELECTION:
-                    Console.WriteLine($"You have selected : {userInput}");
+                    Console.WriteLine($"You have selected : {userInput}: Fantasy");
 
                     break;
 
                 case Constants.B_SELECTION:
-                    Console.WriteLine($"You have selected {userInput}");
+                    Console.WriteLine($"You have selected {userInput}: SCI-FI");
 
                     break;
 
                 case Constants.C_SELECTION:
-                    Console.WriteLine($"You have selected {userInput}");
+                    Console.WriteLine($"You have selected {userInput}: True Story");
 
                     break;
                 case Constants.D_SELECTION:
-                    Console.WriteLine($"You have selected {userInput}");
+                    Console.WriteLine($"You have selected {userInput}: Horror");
 
                     break;
 
@@ -122,19 +136,29 @@ namespace StoryOrganizer
                     break;
             }
         }
-        BrainDumpManager getDumpList = new BrainDumpManager();
-        BrainStormDump dump = new BrainStormDump();
 
-        public void DisplayingTheBrainDumps()
+        public static string SelectingCategoryforLoop()
         {
-            int indexedNumber = 0;
 
-            for (int i = 0; i < getDumpList.GetList().Count; i++) // 
+            return string .Empty;   
+        }
+        BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
+        BrainStormDump IdeaDump = new BrainStormDump(); //object of BrainStormDump
+
+        public static void DisplayingTheBrainDumps(BrainDumpManager dumpManager)
+        {
+            int indexedNumber = 1;
+            var dumps = dumpManager.GetList();
+
+            for (int i = 0; i < dumps.Count; i++)
             {
-                for (int j = 0; j < dump.DumpArea.Count ; i++ )
+                var dump = dumps[i];
+                Console.WriteLine($"(title)Idea{indexedNumber:D2}:");
+                for (int j = 0; j < dump.DumpArea.Count; j++)
                 {
-                    //create later
+                    Console.WriteLine($" - {dump.DumpArea[j]}");
                 }
+                indexedNumber++;
             }
         }
 
