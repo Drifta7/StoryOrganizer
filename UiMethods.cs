@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Channels;
@@ -15,11 +16,55 @@ namespace StoryOrganizer
             Console.WriteLine("Welcome to StoryOrganizer");
         }
 
-        public static int UserModeSelection()
+        public static int UserModeSelection() // used for Mode selection 
         {
-            Console.WriteLine(" Create a Story Select a Mode");
+            Console.WriteLine(" Create a Story Selection Mode");
             int UserModeSelection = 0;
             return UserModeSelection;
+        }
+
+        public static int ValidateUserStorySelection()
+        {
+            int userChoice;
+            bool isTheInputValid = false;
+            do
+            {
+                string inVoluntaryInput = Console.ReadLine();
+                if (int.TryParse(inVoluntaryInput, out userChoice))
+                {
+                    if (userChoice == Constants.BRAIN_DUMP_MODE_SELECTION)
+                    {
+                        Console.WriteLine($"You have selected {userChoice}");
+                        isTheInputValid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("This is not a valid selection. Please try again");
+                    }
+
+                    if (userChoice == Constants.CREATING_PLOT_MODE)
+                    {
+                        Console.WriteLine($"You have selected {userChoice}");
+                        isTheInputValid = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("This is not a vaild selection. PLease try again");
+                    }
+
+                    if (userChoice == Constants.CREATING_TAGS_ID_CARDS)
+                    {
+                        Console.WriteLine($"You have selected {userChoice}");
+                        isTheInputValid = true;
+                    }
+                    else 
+                    {
+                        Console.WriteLine("This is not a vaild selection. PLease try again");
+                    }
+                }
+
+            } while (!isTheInputValid);
+            return userChoice;
         }
 
         public static string AskUserAboutIdea()
@@ -27,6 +72,12 @@ namespace StoryOrganizer
             Console.WriteLine("What Idea(s) would you like to put out?\n");
             string? UserAnswer = Console.ReadLine();
             return UserAnswer;
+        }
+
+        public static void AskingUserToCreateTags()
+        {
+            Console.WriteLine("Please Create a Tag for oraganisation purposes ");
+            // wondering if I should place tag objs in here?
         }
         public static int SelectOrganizerMode()
         {
@@ -140,8 +191,9 @@ namespace StoryOrganizer
         public static string SelectingCategoryforLoop()
         {
 
-            return string .Empty;   
+            return string.Empty;
         }
+
         BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
         BrainStormDump IdeaDump = new BrainStormDump(); //object of BrainStormDump
 

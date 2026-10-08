@@ -8,7 +8,7 @@ namespace StoryOrganizer
 {
     public class Character
     {
-        private string _characterBackStory;
+        private string? _characterBackStory;
         
         public List<string> MainCharacter = new List<string>();
         public List<string> MainCharacters = new List<string>();

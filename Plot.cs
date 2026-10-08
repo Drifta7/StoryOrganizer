@@ -35,7 +35,6 @@ namespace StoryOrganizer
 
         public string RisingAction { get; set; } // the events and conflicts that build suspense, tension and complications 
 
-       
 
         public string PlotPregression  // which characters and themes would push the plot further, as opposed to having the characters just exist
         {

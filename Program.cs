@@ -25,40 +25,45 @@ namespace StoryOrganizer
 
             int UserSelectionMode = UiMethods.UserModeSelection();
 
-            //if (UserSelectionMode == Constants.BRAIN_DUMP_MODE_SELECTION) { }
+            if (UserSelectionMode == Constants.BRAIN_DUMP_MODE_SELECTION)
+            {
+                int ideaCounter = 0;
+                while (!isUserDoneBrainStorming)
+                {
+                    //Adds to the User Ideas to a list when Brainstorming
+                    BrainStormDump dumpEntry = new BrainStormDump();
+
+                    passOn.AddBrainDump(dumpEntry);
+
+                    UiMethods.AskIfUserIsDoneQuestion();
+                    char userYesOrNoAns = Logic.ValidateUserAnswerToYesNo();
+
+                    if (userYesOrNoAns == Constants._NO)
+                    {
+                        continue;
+                    }
+
+                    else if (userYesOrNoAns == Constants._YES)
+                    {
+                        isUserDoneBrainStorming = true;
+                        //user Exits the session 
+                    }
+                    while (ideaCounter == Constants.IDEA_COUNTER)
+                    {
+                        ideaCounter++;
+                    }
+                }
+
+                foreach (var item in passOn.GetList())
+                {
+                    foreach (var List in item.DumpArea)
+                    {
+                        Console.WriteLine(List);
+                    }
+                }
+            }
             //if (UserSelectionMode == Constants.CREATING_PLOT_MODE) { }
             //if (UserSelectionMode == Constants.BRAIN_DUMP_MODE_SELECTION) { }
-
-            while (!isUserDoneBrainStorming)
-            {
-                //Adds to the User Ideas to a list when Brainstorming
-                BrainStormDump dumpEntry = new BrainStormDump();
-
-                passOn.AddBrainDump(dumpEntry);
-
-                UiMethods.AskIfUserIsDoneQuestion();
-                char userYesOrNoAns = Logic.ValidateUserAnswerToYesNo();
-
-                if (userYesOrNoAns == Constants._NO)
-                {
-                    continue;
-                }
-
-                else if (userYesOrNoAns == Constants._YES)
-                {
-                   
-                    isUserDoneBrainStorming = true;
-                    //user Exits the session 
-                }
-            }
-
-            foreach (var item in passOn.GetList())
-            {
-                foreach (var List in item.DumpArea)
-                {
-                    Console.WriteLine(List);
-                }
-            }
 
             UiMethods.DisplayingTheBrainDumps(passOn);
             //UiMethods.AskAboutMainCharacter(); //not sure I want to call this method just yet

@@ -18,7 +18,6 @@ namespace StoryOrganizer
         public BrainStormDump() // construtor
         {
              DumpArea = new List<string>();
-            // might have to make more properties so 
         }
     }
 }
