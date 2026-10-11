@@ -8,16 +8,30 @@ namespace StoryOrganizer
 {
     public class Events
     {
-        private string _events; 
-        public string BigEvents { get; set; } // big event(s) that help flesh out the story and hold a majority of the story line / plot
+        public List<Tag> Tags = new List<Tag>();
+        public string? Title { get; set; }
+        public int? Order { get; set; }
+        public List<Events> CausedBy { get; set; } = new List<Events>(); // cause and effect
+        public EventType Type { get; set; }
+        public StoryPhase Phase { get; set; }
 
-        public string SmallInteractions { get; set; } // charcters meets with one another for the first time ,
-                                                      // that may lead into another interaction, or group
+        public string? Description { get; set; }
 
-        public string Incidents { get; set; } // similar to Big events but encase events that are all realated eg: bunny within the forrest 
-                                              // goes down a hole to find a golden carrot only which leads to other animals involved in the carrot.
-        public string Celebration { get; set; } // characters celebrate events that are key to story prgression ( can be losse or rigid)
-
-        public string Crisis { get; set; }  // very inportant with in the story would go well with the beginning and climax, which seek a resolution 
+        public List<Character> CharactersInvolved { get; set; } = new List<Character>(); // characters involved in the event 
+        public List<StoryLocation> LocationOfEvent { get; set; } = new List<StoryLocation>();// where the Event takes place withing the story
     }
+    public enum EventType
+    {
+        Unknown,
+        SmallInteractions, // charcters meets with one another for the first time that may lead into another interaction, or group
+        Incident, // related events chained together, eg bunny finds golden carrot, other animals get involved etc.
+        Celebration,  // characters celebrate events that are key to story progression
+        Crisis, // very important, pairs with the beginning and climax, seeks a resolution
+        BigEvent // big event(s) that help flesh out the story and hold a majority of the story line / plot
+    }
+
+    public enum StoryPhase
+    { Unknown, Setup, RisingAction, Climax, FallingAction, Resolution }
+
+
 }

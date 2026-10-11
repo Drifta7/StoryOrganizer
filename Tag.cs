@@ -6,16 +6,10 @@ using System.Threading.Tasks;
 
 namespace StoryOrganizer
 {
-    public class WriterTags
+    public class Tag
     {
         //  purpose of this class will be to help the user to tag certain parts to the their 
         // ideas to the story, most likey to be color coded and will be a visual aid and Part of the UI 
-        private string _tags;
-
-        public string Tags
-        {
-            get { return _tags; }
-            set { _tags = value; }
-        }
+     public string Name { get; set; }
     }
 }

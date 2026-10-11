@@ -8,15 +8,16 @@ namespace StoryOrganizer
 {
     public class StoryCategory
     {
+        public List<Tag> Tags { get; set; }
         // might change this to a Plot class 
-        private string _category { get; set; } // field 
+        private string _category = string.Empty;
 
         public string Category 
         {
             get { return _category; } //reads 
             set // writes
             {
-                List<string> List = new List<string>();
+                _category = value;
             }
         }
         public static List<string> multiGenreStory = new List<string>(); //for if stories have more than one genre  

@@ -19,7 +19,7 @@ namespace StoryOrganizer
         public static int UserModeSelection() // used for Mode selection 
         {
             Console.WriteLine(" Create a Story Selection Mode");
-            int UserModeSelection = 0;
+            int UserModeSelection = Convert.ToInt32(Console.ReadLine());
             return UserModeSelection;
         }
 
@@ -57,7 +57,7 @@ namespace StoryOrganizer
                         Console.WriteLine($"You have selected {userChoice}");
                         isTheInputValid = true;
                     }
-                    else 
+                    else
                     {
                         Console.WriteLine("This is not a vaild selection. PLease try again");
                     }
@@ -221,17 +221,17 @@ namespace StoryOrganizer
             Character characAtt = new Character(); // Character Class object
             Console.WriteLine("What is the age of the Main Character?");
 
-            characAtt.CharacterAttributes.Add("Age");
+           // characAtt.CharacterAttributes.Add("Age");
             int age = NumberedUserInput();
 
             Console.WriteLine("What is the main character's Personality like?");
 
-            characAtt.CharacterAttributes.Add("personailty");
+           // characAtt.CharacterAttributes.Add("personailty");
 
-            characAtt.CharacterAttributes.Add("height");
+           // characAtt.CharacterAttributes.Add("height");
 
-            characAtt.CharacterAttributes.Add("weight");
-            characAtt.CharacterAttributes.Add("Occuaption");
+           // characAtt.CharacterAttributes.Add("weight");
+          //  characAtt.CharacterAttributes.Add("Occuaption");
 
             Console.WriteLine("What is the main Charcters goals");
 
@@ -239,10 +239,10 @@ namespace StoryOrganizer
 
             characAtt.CharactersGoals.Add($"{goalInput}");
 
-            foreach (var item in characAtt.CharacterAttributes)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in characAtt.CharacterAttributes)
+            //{
+            //    Console.WriteLine(item);
+            //}
         }
     }
 }

@@ -8,8 +8,13 @@ namespace StoryOrganizer
 {
     public class PlotTwist
     {
-        public List<string> CharatersInPlotTwist = new List<string>(); // are they the same characters?
+        public List<Tag> Tags { get; set; }
+        public string Description { get; set; } = string.Empty;
+        public Events? RevealEvent { get; set; }
+        public List<Events> ForeshadowEvents { get; set; } = new List<Events>();
 
-        public List<string> WhereThePlotTwistHappens = new List<string>();
+        public List<Character> CharatersInPlotTwist { get; set; } = new List<Character>(); // are they the same characters within the orginal plot?
+
+        public List<StoryLocation> WhereThePlotTwistHappens { get; set; } = new List<StoryLocation>();
     }
 }
