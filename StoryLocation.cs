@@ -9,16 +9,15 @@ namespace StoryOrganizer
 {
     public class StoryLocation
     {
-        public List<Tag> Tags { get; set; } // tags for location(s)
+        public List<Tag>? Tags { get; set; } // tags for location(s)
        
-
         public string? Description { get; set; }
 
         public StoryLocation? Parent { get; set; }
 
         public string Name { get; set; } = String.Empty;
         
-        private string _address;
+        private string? _address;
         public string Address
         {
             get { return _address; }

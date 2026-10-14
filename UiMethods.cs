@@ -15,6 +15,10 @@ namespace StoryOrganizer
         {
             Console.WriteLine("Welcome to StoryOrganizer");
         }
+        public static void PlotUserPrompt()
+        {
+            Console.WriteLine("Create Some Ideas for the story plot");
+        }
 
         public static int UserModeSelection() // used for Mode selection 
         {
@@ -23,6 +27,19 @@ namespace StoryOrganizer
             return UserModeSelection;
         }
 
+        public static void AskUserIfBeginningDone()
+        {
+            Console.WriteLine("Are you done or satisfied with what you have for the beginning? ");
+        }
+        public static void AskUserIfMiddleDone()
+        {
+            Console.WriteLine("Are you done or satisfied with what you have for the Middle? ");
+        }
+
+        public static void AskUserIfEndingDone()
+        {
+            Console.WriteLine("Are you done or satisfied with what you have for the Ending? ");
+        }
         public static int ValidateUserStorySelection()
         {
             int userChoice;
@@ -66,7 +83,10 @@ namespace StoryOrganizer
             } while (!isTheInputValid);
             return userChoice;
         }
-
+        public static void ClearUserEntry()
+        {
+            Console.Clear();
+        }
         public static string AskUserAboutIdea()
         {
             Console.WriteLine("What Idea(s) would you like to put out?\n");
@@ -111,10 +131,34 @@ namespace StoryOrganizer
             while (!isUserSelectionValid);
             return userSelection;
         }
+        // both of these are linked together 
+        public static int PlotModeSelection()
+        {
+            int userSelection = Convert.ToInt32(Console.ReadLine());
+            return userSelection;
+        }
+        // linked to the method above
+        public static int ValidatePlotSelection(int PlotModeSelection, int ConstSelection)
+        {
+            bool isPlotSelectionValid = false;
+            do
+            {
+                if (PlotModeSelection == ConstSelection) // 
+                {
+                    Console.WriteLine($" you have selected: {PlotModeSelection}");
+                }
+                else
+                {
+                    Console.WriteLine("This is not the correct Selection ");
+                }
+            }
+            while (!isPlotSelectionValid);
+            return PlotModeSelection;
+        }
 
         public static void AskIfUserIsDoneQuestion()
         {
-            Console.WriteLine("Is user Done Brainstroming?\n");
+            Console.WriteLine("Is user Done Brainstroming?\nSelect Y/N\n");
         }
 
         // displays what the user has placed in userAnswer
@@ -188,14 +232,45 @@ namespace StoryOrganizer
             }
         }
 
+        public static int GetTheUserModeSelection(int userInput)
+        {
+            Console.WriteLine("Please Select which of the Following choices:\nBeginning Mode\n Middle Mode\nEndMode\nClimax");
+
+            switch (userInput)
+            {
+                case Constants.BEGINNING_MODE:
+                    Console.WriteLine($"You have selected:{userInput}: Beginning Mode");
+                    
+                    break;
+
+                case Constants.MIDDLE_MODE:
+                    Console.WriteLine($"You have selected:{userInput}:Middle Mode");
+                    
+                    break;
+
+                case Constants.END_MODE:
+                    Console.WriteLine($"You have selected:{userInput}:End Mode");
+                    
+                    break;
+                case Constants.CLIMAX_MODE:
+                    Console.WriteLine($"You have selected:{userInput}: Climax Mode");
+                    break;
+
+                default:
+                    Console.WriteLine("Invaild Selection");
+                    
+                    break;
+            }
+            return userInput;
+        }
+
         public static string SelectingCategoryforLoop()
         {
-
             return string.Empty;
         }
 
-        BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
-        BrainStormDump IdeaDump = new BrainStormDump(); //object of BrainStormDump
+        //BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
+        //BrainStormDump IdeaDump = new BrainStormDump(); //object of BrainStormDump
 
         public static void DisplayingTheBrainDumps(BrainDumpManager dumpManager)
         {
@@ -221,17 +296,17 @@ namespace StoryOrganizer
             Character characAtt = new Character(); // Character Class object
             Console.WriteLine("What is the age of the Main Character?");
 
-           // characAtt.CharacterAttributes.Add("Age");
+            // characAtt.CharacterAttributes.Add("Age");
             int age = NumberedUserInput();
 
             Console.WriteLine("What is the main character's Personality like?");
 
-           // characAtt.CharacterAttributes.Add("personailty");
+            // characAtt.CharacterAttributes.Add("personailty");
 
-           // characAtt.CharacterAttributes.Add("height");
+            // characAtt.CharacterAttributes.Add("height");
 
-           // characAtt.CharacterAttributes.Add("weight");
-          //  characAtt.CharacterAttributes.Add("Occuaption");
+            // characAtt.CharacterAttributes.Add("weight");
+            //  characAtt.CharacterAttributes.Add("Occuaption");
 
             Console.WriteLine("What is the main Charcters goals");
 

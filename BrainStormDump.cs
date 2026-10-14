@@ -18,7 +18,7 @@ namespace StoryOrganizer
         
         public BrainStormDump() // construtor
         {
-             DumpArea = new List<string>();
+             DumpArea = new List<string>(); // this to displayed within the for each loop in Main() function/Method
         }
     }
 }

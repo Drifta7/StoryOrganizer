@@ -29,11 +29,17 @@ namespace StoryOrganizer
         public const char _YES = 'Y';
         public const char _NO = 'N';
 
-        public const int TIMES_USER_HAS_CREATED_IDEAS = 10; // delete later
+        public const int TIMES_USER_HAS_CREATED_IDEAS = 10; // might delete later
 
         public const int BRAIN_DUMP_MODE_SELECTION = 1;
         public const int CREATING_PLOT_MODE = 2;
         public const int CREATING_TAGS_ID_CARDS = 3;
+
+        public const int BEGINNING_MODE = 1;
+        public const int MIDDLE_MODE = 2;
+        public const int END_MODE = 3;
+        public const int CLIMAX_MODE = 4;
+        public const int PlotTwist = 5;
 
         public const int IDEA_COUNTER = 5;
 

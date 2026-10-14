@@ -12,12 +12,12 @@ namespace StoryOrganizer
         public string? Title { get; set; }
         public int? Order { get; set; }
         public List<Events> CausedBy { get; set; } = new List<Events>(); // cause and effect
-        public EventType Type { get; set; }
-        public StoryPhase Phase { get; set; }
+        public EventType Type { get; set; } // related to the enums
+        public StoryPhase Phase { get; set; } // related to the enums
 
         public string? Description { get; set; }
 
-        public List<Character> CharactersInvolved { get; set; } = new List<Character>(); // characters involved in the event 
+        public List<Character> CharactersInvolvedInEvent { get; set; } = new List<Character>(); // characters involved in the event 
         public List<StoryLocation> LocationOfEvent { get; set; } = new List<StoryLocation>();// where the Event takes place withing the story
     }
     public enum EventType
@@ -32,6 +32,4 @@ namespace StoryOrganizer
 
     public enum StoryPhase
     { Unknown, Setup, RisingAction, Climax, FallingAction, Resolution }
-
-
 }

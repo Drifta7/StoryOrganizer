@@ -22,8 +22,8 @@ namespace StoryOrganizer
         public string? Height { get; set; }
         public int? Age { get; set; }
 
-        public string? sex { get; set; }
-        public string? race { get; set; }
+        public string? Sex { get; set; }
+        public string? Race { get; set; }
         public StoryLocation? Residency { get; set; } // where character lives 
         public string? emotions { get; set; }
 

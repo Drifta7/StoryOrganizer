@@ -26,7 +26,6 @@ namespace StoryOrganizer
             } while (!isUserAnsEitherYOrN);
 
             return yesOrNoAnswer;
-            Console.Clear();
         }
 
         public static char ValidateUserSelectionInMenu(char validateUserEntry)

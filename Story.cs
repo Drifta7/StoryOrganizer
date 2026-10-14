@@ -9,7 +9,6 @@ namespace StoryOrganizer
     public class Story
     {
         public List<Relationship> Relationships { get; } = new List<Relationship>();
-
         public string Title { get; set; } = string.Empty;
         public Plot Plot { get; } = new Plot();
         public List<Character> Characters { get; } = new List<Character>();

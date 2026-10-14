@@ -8,7 +8,7 @@ namespace StoryOrganizer
 {
     public class StoryCategory
     {
-        public List<Tag> Tags { get; set; }
+        public List<Tag>? Tags { get; set; }
         // might change this to a Plot class 
         private string _category = string.Empty;
 
