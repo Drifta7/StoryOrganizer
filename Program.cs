@@ -1,4 +1,5 @@
-﻿using System.Net.NetworkInformation;
+﻿
+using System.ComponentModel;
 
 namespace StoryOrganizer
 {
@@ -6,19 +7,23 @@ namespace StoryOrganizer
     {
         static void Main(string[] args)
         {
+            Story story = new Story(); // create an instance of the object for Story class
             bool isUserDoneBrainStorming = false;
 
             UiMethods.UserGreeting();
             UiMethods.DisplayCategories();
 
-            char AnswerForCharacterSelection = Logic.ValidateUserSelectionInMenu(UiMethods.UserSelection());
+            char AnswerForCharacterSelection = Logic.ValidateUserSelectionInMenu(UiMethods.UserSelectionChar());
 
             Console.Clear();
 
             UiMethods.PrintWhatTheUserSelected(AnswerForCharacterSelection);
 
+            // place the logic Method here 
+
             // here create a method that asked the question about the selection that the user picked
             //psudeoMethodHere();
+
 
             BrainStormDump idea = new BrainStormDump();
             BrainDumpManager passOn = new BrainDumpManager();
@@ -27,31 +32,21 @@ namespace StoryOrganizer
 
             if (UserSelectionMode == Constants.BRAIN_DUMP_MODE_SELECTION)
             {
-                int ideaCounter = 0;
+
                 while (!isUserDoneBrainStorming)
                 {
                     //Adds to the User Ideas to a list when Brainstorming
                     BrainStormDump dumpEntry = new BrainStormDump();
 
-                    passOn.AddBrainDump(dumpEntry); // passOn object to acesse the AddBrainDump
+                    Logic.UserDrivenInputToClass(dumpEntry); // asks for ideas and stores them in dumpEntry
 
+                    passOn.AddBrainDump(dumpEntry); // stores the finished batch
                     UiMethods.AskIfUserIsDoneQuestion();
+
                     char userYesOrNoAns = Logic.ValidateUserAnswerToYesNo();
                     UiMethods.ClearUserEntry();
-                    if (userYesOrNoAns == Constants._NO)
-                    {
-                        continue;
-                    }
 
-                    else if (userYesOrNoAns == Constants._YES)
-                    {
-                        isUserDoneBrainStorming = true;
-                        //user Exits the session 
-                    }
-                    while (ideaCounter == Constants.IDEA_COUNTER)
-                    {
-                        ideaCounter++;
-                    }
+                    isUserDoneBrainStorming = userYesOrNoAns == Constants._YES;
                 }
 
                 // foreach loop displays the Users finished ideas
@@ -67,102 +62,74 @@ namespace StoryOrganizer
 
             if (UserSelectionMode == Constants.CREATING_PLOT_MODE)
             {
-                bool isTheUserDoneWithBeginning = false;
-
-                int var = UiMethods.PlotModeSelection();
-                UiMethods.ValidatePlotSelection(var, Constants.BEGINNING_MODE);
-                int switchSelection = UiMethods.GetTheUserModeSelection(var);
-
-                if (var == Constants.BEGINNING_MODE)
+                int plotSelection = UiMethods.PlotModeSelection();
+                while (plotSelection != Constants.PLOT_DONE)
                 {
-                    char userYesOrNoAns = Logic.ValidateUserAnswerToYesNo();
-                    while (!isTheUserDoneWithBeginning)
+                    switch (plotSelection)
                     {
-                        UiMethods.PlotUserPrompt();
+                        case Constants.BEGINNING_MODE:
+                            story.Plot.Beginning += UiMethods.CollectPlotSection("beginning");
 
-                        Plot PlotAccess = new Plot();
-                        PlotAccess.Beginning = Console.ReadLine(); // where will this return to????
+                            break;
 
-                        if (userYesOrNoAns == Constants._NO)
-                        {
-                            continue;
-                        }
-                        else if (userYesOrNoAns == Constants._YES)
-                        {
-                            isTheUserDoneWithBeginning = true;
-                        }
+                        case Constants.MIDDLE_MODE:
+                            story.Plot.Middle += UiMethods.CollectPlotSection("middle");
+
+                            break;
+
+                        case Constants.END_MODE:
+                            story.Plot.Ending += UiMethods.CollectPlotSection("ending");
+
+                            break;
+
+                        case Constants.CLIMAX_MODE:
+                            story.Plot.Climax += UiMethods.CollectPlotSection("climax");
+                            break;
+
+                        case Constants.PLOT_TWIST_MODE:
+
+                            PlotTwist twist = new PlotTwist(); // a NEW twist, owned by the plot's list
+                            twist.Description = UiMethods.CollectPlotSection("plot twist");
+                            story.Plot.PlotTwists.Add(twist);
+
+                            break;
+
+                        case Constants.POSSIBLE_FILLERS_MODE:
+                            story.Plot.PossibleFillers += UiMethods.CollectPlotSection("possible fillers");
+
+                            break;
+
+                        case Constants.PLOT_PROGRESSION_MODE:
+                            story.Plot.PlotPrgression += UiMethods.CollectPlotSection("plot progression");
+
+                            break;
                     }
+
+                    plotSelection = UiMethods.PlotModeSelection(); // back to the plot menu
                 }
 
-                if (var == Constants.MIDDLE_MODE)
-                {
-                    bool isUserDoneWithMiddle = false;
-                    char userYesOrNo = Logic.ValidateUserAnswerToYesNo();
-                    while (!isUserDoneWithMiddle)
-                    {
-                        UiMethods.PlotUserPrompt();
-                        Plot PlotAccessMid = new Plot();
-                        PlotAccessMid.Middle = Console.ReadLine();
-
-                        if (userYesOrNo == Constants._NO)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            isUserDoneWithMiddle = true;
-                        }
-                    }
-                }
-                if (var == Constants.END_MODE)
-                {
-                    bool isUserDoneWithEnding = false;
-                    char userYesOrNo = Logic.ValidateUserAnswerToYesNo();
-                    while (!isUserDoneWithEnding)
-                    {
-                        UiMethods.PlotUserPrompt();
-                        Plot PlotAccessEnd = new Plot();
-                        PlotAccessEnd.Ending = Console.ReadLine();
-
-                        if (userYesOrNo == Constants._NO)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            isUserDoneWithEnding = true;
-                        }
-                    }
-                }
-
-                if (var == Constants.CLIMAX_MODE)
-                {
-                    bool isUserDoneWithClimax = false;
-                    char userYesOrNo = Logic.ValidateUserAnswerToYesNo();
-                    while (!isUserDoneWithClimax)
-                    {
-                        UiMethods.PlotUserPrompt();
-                        Plot PlotAccessClimax = new Plot();
-                        PlotAccessClimax.Climax = Console.ReadLine();
-
-                        if (userYesOrNo == Constants._NO)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            isUserDoneWithClimax = false;
-                        }
-                    }
-                }
-                if (UserSelectionMode == Constants.CREATING_TAGS_ID_CARDS)
-                {
-                    Console.WriteLine(" 3rd Selection worked and this is the result ");
-                }
-
-                UiMethods.DisplayingTheBrainDumps(passOn);
-                //UiMethods.AskAboutMainCharacter(); //not sure I want to call this method just yet
+                UiMethods.DisplayPlot(story.Plot); // shows everything that was stored in the Story
             }
+
+            if (UserSelectionMode == Constants.CREATING_TAGS_ID_CARDS)
+            {
+                Console.WriteLine(" 3rd Selection worked and this is the result ");
+            }
+
+            if (UserSelectionMode == Constants.CREATING_CHARACTER_MODE)
+            {
+                Character newCharacter = UiMethods.CharacterDevelopmentMode();
+                story.Characters.Add(newCharacter); // the Story owns this character 
+
+                Console.WriteLine($"\nChacactet in the story: {story.Characters.Count}");
+
+                foreach (Character character in story.Characters)
+                {
+                    Console.WriteLine($"{character.Name}:{character.CharacterBackStory}");
+                }
+
+            }
+            UiMethods.DisplayingTheBrainDumps(passOn);
         }
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace StoryOrganizer
 {
-    public class Plot
+    public class PlotSystem
     {
         public List<Tag>? Tags { get; set; } // tags for the plot
 
-        private string? _plot;
+        private List<string> _plot { get; set; } = new List<string>(); // plot field.
 
         // user will get to choose either beginning, middle, end and work accordingly 
 
@@ -22,17 +22,14 @@ namespace StoryOrganizer
         public List<PlotTwist> PlotTwists { get; } = new List<PlotTwist>(); // to "spice" up the story
 
         public string? PossibleFillers { get; set; } // things that may develop the story, plot or characters
-
-        public string? PlotPregression  // which characters and themes would push the plot further, as opposed to having the characters or events just exist
+        public string? PlotPrgression { get; set; } // which characters and themes would push the plot further, as opposed to having the characters or events just exist
+        
+        public List<string> Plot  
         {
             get { return _plot; }
             set { _plot = value; }
         }
-        //public void AddPlotPart(Plot builder)
-        //{
-        //    builder.Beginning.
-            
-                
-        //}
+
+
     }
 }

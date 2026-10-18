@@ -22,24 +22,26 @@ namespace StoryOrganizer
 
         public static int UserModeSelection() // used for Mode selection 
         {
-            Console.WriteLine(" Create a Story Selection Mode");
+            Console.WriteLine("\nCreate a Story Selection Mode");
+            // might have to use the try catch method just incase the exception us Unhandled 
+
+            Console.WriteLine("1: Brain Dump\n2: Create the Plot\n3: Tags\n4: Create a Character");
+
             int UserModeSelection = Convert.ToInt32(Console.ReadLine());
+
+            while (!int.TryParse(Console.ReadLine(), out UserModeSelection) ||
+                UserModeSelection < Constants.BRAIN_DUMP_MODE_SELECTION ||
+                UserModeSelection > Constants.CREATING_CHARACTER_MODE)
+            {
+                Console.WriteLine($"This is not a valid selection. Please enter a number within" +
+                    $" the menu from {Constants.BRAIN_DUMP_MODE_SELECTION}" +
+                    $" to {Constants.CREATING_CHARACTER_MODE}");
+            }
+            Console.WriteLine($" You Have selected {UserModeSelection}");
             return UserModeSelection;
         }
 
-        public static void AskUserIfBeginningDone()
-        {
-            Console.WriteLine("Are you done or satisfied with what you have for the beginning? ");
-        }
-        public static void AskUserIfMiddleDone()
-        {
-            Console.WriteLine("Are you done or satisfied with what you have for the Middle? ");
-        }
 
-        public static void AskUserIfEndingDone()
-        {
-            Console.WriteLine("Are you done or satisfied with what you have for the Ending? ");
-        }
         public static int ValidateUserStorySelection()
         {
             int userChoice;
@@ -134,28 +136,50 @@ namespace StoryOrganizer
         // both of these are linked together 
         public static int PlotModeSelection()
         {
-            int userSelection = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("\nWhich part of the plot do you wnat to work on?");
+            Console.WriteLine("1: Beginning\n2: Middle\n 3: Ending\n4: Climax\n5: Plot Twist\n6: Possible Fillers\n7: Plot Progression\n0: Done");
+            int userSelection;
+            while (!int.TryParse(Console.ReadLine(), out userSelection) || userSelection < Constants.PLOT_DONE ||
+                    userSelection > Constants.PLOT_PROGRESSION_MODE)
+            {
+                Console.WriteLine("This is not a valid selection. Please enter a number from 0 to 7 ");
+            }
             return userSelection;
         }
-        // linked to the method above
-        public static int ValidatePlotSelection(int PlotModeSelection, int ConstSelection)
+
+        public static string CollectPlotSection(string sectionName)
         {
-            bool isPlotSelectionValid = false;
-            do
+            string text = "";
+            bool isUserDone = false;
+            while (!isUserDone)
             {
-                if (PlotModeSelection == ConstSelection) // 
-                {
-                    Console.WriteLine($" you have selected: {PlotModeSelection}");
-                }
-                else
-                {
-                    Console.WriteLine("This is not the correct Selection ");
-                }
+                Console.WriteLine($"Write some ideas for the {sectionName}:");
+                text += Console.ReadLine() + "\n"; // added += because the when an idea is placed it will not get replaced 
+
+                Console.WriteLine($"Are you done or statisfied with what you ahev for {sectionName} (Y/N)");
+                isUserDone = Logic.ValidateUserAnswerToYesNo() == Constants._YES;
+                Console.WriteLine();
             }
-            while (!isPlotSelectionValid);
-            return PlotModeSelection;
+            return text;
         }
 
+        // prints every part of the plot so the user can see what was stored
+        public static void DisplayPlot(PlotSystem plot)
+        {
+            Console.WriteLine("\n===== Your Plot =====");
+            Console.WriteLine($"Beginning:\n{plot.Beginning}");
+            Console.WriteLine($"Middle:\n{plot.Middle}");
+            Console.WriteLine($"Ending:\n{plot.Ending}");
+            Console.WriteLine($"Climax:\n{plot.Climax}");
+            Console.WriteLine($"Possible Fillers:\n{plot.PossibleFillers}");
+            Console.WriteLine($"Plot Progression:\n{plot.PlotPrgression}");
+            Console.WriteLine($"Plot Twists ({plot.PlotTwists.Count}):");
+
+            for (int i = 0; i < plot.PlotTwists.Count; i++)
+            {
+                Console.WriteLine($" {i + 1}. {plot.PlotTwists[i].Description}");
+            }
+        }
         public static void AskIfUserIsDoneQuestion()
         {
             Console.WriteLine("Is user Done Brainstroming?\nSelect Y/N\n");
@@ -179,7 +203,7 @@ namespace StoryOrganizer
             return userInput;
         }
 
-        public static char UserSelection()
+        public static char UserSelectionChar()
         {
             char userSelection = Console.ReadKey().KeyChar;
             return userSelection;
@@ -240,17 +264,17 @@ namespace StoryOrganizer
             {
                 case Constants.BEGINNING_MODE:
                     Console.WriteLine($"You have selected:{userInput}: Beginning Mode");
-                    
+
                     break;
 
                 case Constants.MIDDLE_MODE:
                     Console.WriteLine($"You have selected:{userInput}:Middle Mode");
-                    
+
                     break;
 
                 case Constants.END_MODE:
                     Console.WriteLine($"You have selected:{userInput}:End Mode");
-                    
+
                     break;
                 case Constants.CLIMAX_MODE:
                     Console.WriteLine($"You have selected:{userInput}: Climax Mode");
@@ -258,12 +282,11 @@ namespace StoryOrganizer
 
                 default:
                     Console.WriteLine("Invaild Selection");
-                    
+
                     break;
             }
             return userInput;
         }
-
         public static string SelectingCategoryforLoop()
         {
             return string.Empty;
@@ -288,36 +311,19 @@ namespace StoryOrganizer
                 indexedNumber++;
             }
         }
-
-
-        // this to fill out for the user characters and their attributes 
-        public static void AskAboutMainCharacter()
+        public static Character CharacterDevelopmentMode()
         {
-            Character characAtt = new Character(); // Character Class object
-            Console.WriteLine("What is the age of the Main Character?");
+            Character newCharacter = new Character();
 
-            // characAtt.CharacterAttributes.Add("Age");
-            int age = NumberedUserInput();
+            Console.WriteLine("Create a Character!");
+            Console.WriteLine("What is the Character's Name");
+            newCharacter.Name = Console.ReadLine();
 
-            Console.WriteLine("What is the main character's Personality like?");
+            Console.WriteLine($"Create a backstory for {newCharacter.Name} ");
+            newCharacter.CharacterBackStory = Console.ReadLine(); // creates a back story for the (main) character 
 
-            // characAtt.CharacterAttributes.Add("personailty");
 
-            // characAtt.CharacterAttributes.Add("height");
-
-            // characAtt.CharacterAttributes.Add("weight");
-            //  characAtt.CharacterAttributes.Add("Occuaption");
-
-            Console.WriteLine("What is the main Charcters goals");
-
-            string goalInput = CharacterGoalInput();
-
-            characAtt.CharactersGoals.Add($"{goalInput}");
-
-            //foreach (var item in characAtt.CharacterAttributes)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            return newCharacter;
         }
     }
 }

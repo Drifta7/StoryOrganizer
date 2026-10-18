@@ -12,7 +12,6 @@ namespace StoryOrganizer
 
         public void AddBrainDump(BrainStormDump dump)
         {
-            dump.DumpArea.Add(UiMethods.AskUserAboutIdea()); //adds AskUserAboutIdea return value to DumpArea in the class
             UserIdeasAreaList.Add(dump); // adds User Entry to the BrainDumplist
         }
 

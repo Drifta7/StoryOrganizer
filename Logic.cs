@@ -12,7 +12,7 @@ namespace StoryOrganizer
         {
             bool isUserAnsEitherYOrN = false;
             char yesOrNoAnswer = char.ToUpper(Console.ReadKey().KeyChar);
-           
+
             do
             {
                 if (yesOrNoAnswer != Constants._YES && yesOrNoAnswer != Constants._NO)
@@ -27,6 +27,19 @@ namespace StoryOrganizer
 
             return yesOrNoAnswer;
         }
+
+        //public static void SelectedStoryMode(Plot plot)
+        //{
+        //    while (!isUserDoneWithEnding)
+        //    {
+        //        Plot plot = new Plot();
+        //        plot.Beginning = Console.ReadLine();
+
+        //    }
+        //}
+
+
+
 
         public static char ValidateUserSelectionInMenu(char validateUserEntry)
         {
@@ -47,6 +60,20 @@ namespace StoryOrganizer
             }
             while (!hasUserChoosenChar);
             return upperChar;
+        }
+        public static char ValidateUserSelection(char validateUserEntry)
+        {
+            char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
+            Console.WriteLine();// used to create another line 
+            return upperChar;
+        }
+        // this allows the User to create as many ideas they want
+        public static void UserDrivenInputToClass(BrainStormDump dump) // <-------this method work great which will stay.
+        {
+            for (int i = 0; i < Constants.IDEA_COUNTER; i++)
+            {
+                dump.DumpArea.Add(UiMethods.AskUserAboutIdea()); // this places the Ideas into DumpArea
+            }
         }
 
         public static int AgeLogicCalculator(int input, int ConstantInput) // age less or equal to OR greater than
