@@ -16,5 +16,6 @@ namespace StoryOrganizer
 
         public List<Events> Events { get; } = new List<Events>();
         public List<StoryItem> Items { get; } = new List<StoryItem>();
+        public List<Tag> Tags { get; } = new List<Tag>(); // Master list: every tag in the story is created once, here 
     }
 }

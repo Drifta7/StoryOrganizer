@@ -75,7 +75,42 @@ namespace StoryOrganizer
                 dump.DumpArea.Add(UiMethods.AskUserAboutIdea()); // this places the Ideas into DumpArea
             }
         }
-
+        // returns the location with this name from the Story, creating it (once) if it doesn't exist yet
+        public static StoryLocation? FindOrCreateLocation(Story story, string? locationName)
+        {
+            if (string.IsNullOrWhiteSpace(locationName))
+            {
+                return null; // left blank or no location
+            }
+            foreach (StoryLocation location in story.Locations)
+            {
+                if (location.Name.Equals(locationName.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    return location;
+                }
+            }
+            StoryLocation newLocation = new StoryLocation { Name = locationName.Trim() };
+            story.Locations.Add(newLocation);// create once, owned by the Story
+            return newLocation;
+        }
+        public static Tag? FindTag(Story story, string tagName)
+        {
+            foreach (Tag tag in story.Tags)
+            {
+                if (tag.Name.Equals(tagName.Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    return tag;
+                }
+            }
+            return null;
+        }
+        // creates a new tag once and adds it to the Story's master list
+        public static Tag CreateTag(Story story, string tagName, String color)
+        {
+            Tag newTag = new Tag { Name = tagName.Trim(), Color = color };
+            story.Tags.Add(newTag);// created once, owned by the story
+            return newTag;
+        }
         public static int AgeLogicCalculator(int input, int ConstantInput) // age less or equal to OR greater than
         {
             int age = 0;

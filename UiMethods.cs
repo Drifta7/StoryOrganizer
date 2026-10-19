@@ -15,11 +15,7 @@ namespace StoryOrganizer
         {
             Console.WriteLine("Welcome to StoryOrganizer");
         }
-        public static void PlotUserPrompt()
-        {
-            Console.WriteLine("Create Some Ideas for the story plot");
-        }
-
+        
         public static int UserModeSelection() // used for Mode selection 
         {
             Console.WriteLine("\nCreate a Story Selection Mode");
@@ -27,7 +23,7 @@ namespace StoryOrganizer
 
             Console.WriteLine("1: Brain Dump\n2: Create the Plot\n3: Tags\n4: Create a Character");
 
-            int UserModeSelection = Convert.ToInt32(Console.ReadLine());
+            int UserModeSelection;
 
             while (!int.TryParse(Console.ReadLine(), out UserModeSelection) ||
                 UserModeSelection < Constants.BRAIN_DUMP_MODE_SELECTION ||
@@ -41,50 +37,6 @@ namespace StoryOrganizer
             return UserModeSelection;
         }
 
-
-        public static int ValidateUserStorySelection()
-        {
-            int userChoice;
-            bool isTheInputValid = false;
-            do
-            {
-                string inVoluntaryInput = Console.ReadLine();
-                if (int.TryParse(inVoluntaryInput, out userChoice))
-                {
-                    if (userChoice == Constants.BRAIN_DUMP_MODE_SELECTION)
-                    {
-                        Console.WriteLine($"You have selected {userChoice}");
-                        isTheInputValid = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("This is not a valid selection. Please try again");
-                    }
-
-                    if (userChoice == Constants.CREATING_PLOT_MODE)
-                    {
-                        Console.WriteLine($"You have selected {userChoice}");
-                        isTheInputValid = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("This is not a vaild selection. PLease try again");
-                    }
-
-                    if (userChoice == Constants.CREATING_TAGS_ID_CARDS)
-                    {
-                        Console.WriteLine($"You have selected {userChoice}");
-                        isTheInputValid = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("This is not a vaild selection. PLease try again");
-                    }
-                }
-
-            } while (!isTheInputValid);
-            return userChoice;
-        }
         public static void ClearUserEntry()
         {
             Console.Clear();
@@ -101,12 +53,7 @@ namespace StoryOrganizer
             Console.WriteLine("Please Create a Tag for oraganisation purposes ");
             // wondering if I should place tag objs in here?
         }
-        public static int SelectOrganizerMode()
-        {
-            int UserInput = 0;
-            return UserInput;
-        }
-
+       
         public static char AskingUserToAddAags()
         {
             Console.WriteLine("Do you want to add a Tag?");
@@ -255,43 +202,7 @@ namespace StoryOrganizer
                     break;
             }
         }
-
-        public static int GetTheUserModeSelection(int userInput)
-        {
-            Console.WriteLine("Please Select which of the Following choices:\nBeginning Mode\n Middle Mode\nEndMode\nClimax");
-
-            switch (userInput)
-            {
-                case Constants.BEGINNING_MODE:
-                    Console.WriteLine($"You have selected:{userInput}: Beginning Mode");
-
-                    break;
-
-                case Constants.MIDDLE_MODE:
-                    Console.WriteLine($"You have selected:{userInput}:Middle Mode");
-
-                    break;
-
-                case Constants.END_MODE:
-                    Console.WriteLine($"You have selected:{userInput}:End Mode");
-
-                    break;
-                case Constants.CLIMAX_MODE:
-                    Console.WriteLine($"You have selected:{userInput}: Climax Mode");
-                    break;
-
-                default:
-                    Console.WriteLine("Invaild Selection");
-
-                    break;
-            }
-            return userInput;
-        }
-        public static string SelectingCategoryforLoop()
-        {
-            return string.Empty;
-        }
-
+      
         //BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
         //BrainStormDump IdeaDump = new BrainStormDump(); //object of BrainStormDump
 
@@ -311,19 +222,175 @@ namespace StoryOrganizer
                 indexedNumber++;
             }
         }
-        public static Character CharacterDevelopmentMode()
+        public static Character CharacterDevelopmentMode(Story story)
         {
             Character newCharacter = new Character();
-
             Console.WriteLine("Create a Character!");
-            Console.WriteLine("What is the Character's Name");
+
+            Console.WriteLine("\nWhat is the Character's Name");
             newCharacter.Name = Console.ReadLine();
+
+            newCharacter.Role = SelectFromEnum<CharacterRole>($"\nWhat role does {newCharacter.Name} play in the story?");
 
             Console.WriteLine($"Create a backstory for {newCharacter.Name} ");
             newCharacter.CharacterBackStory = Console.ReadLine(); // creates a back story for the (main) character 
 
+            Console.WriteLine("What is the Age (leave blank if unknown)");
+            int age;
+            if (int.TryParse(Console.ReadLine(), out age))
+            {
+                newCharacter.Age = age;
+            }
+
+            Console.WriteLine("What is the characters Occupation?");
+            newCharacter.Occupation = Console.ReadLine();
+
+            newCharacter.status = SelectFromEnum<Status>($"\nWhat is {newCharacter.Name}'s economic status?");
+
+            Console.WriteLine("What Type of Personality does the Character have? \ncheerful\ngloomy\nstoic\nArrogant\n...etc");
+            newCharacter.Personality = Console.ReadLine();
+
+            Console.WriteLine("What is the Height of The Character?");
+            newCharacter.Height = Console.ReadLine();
+
+            Console.WriteLine("How much does the character weigh?");
+            newCharacter.Weight = Console.ReadLine();
+
+            Console.WriteLine("What is the Sex of the Character?");
+            newCharacter.Sex = Console.ReadLine();
+
+            Console.WriteLine("What is the Character's Ethnicity? ");
+            newCharacter.Race = Console.ReadLine();
+
+            Console.WriteLine("What are the common emotion that the Character displays");
+            newCharacter.emotions = Console.ReadLine();
+
+            newCharacter.Likes.AddRange(CollectList($"What does {newCharacter.Name} like?"));
+            newCharacter.Dislikes.AddRange(CollectList($"What does {newCharacter.Name} dislike?"));
+            newCharacter.CharactersGoals.AddRange(CollectList($"What are {newCharacter.Name}'s goals?"));
+
+            Console.WriteLine("Where does the character live? (Leave blank if unknown)");
+            newCharacter.Residency = Logic.FindOrCreateLocation(story, Console.ReadLine());
+
+            Console.WriteLine("Where was the Character born? (Leave blank if unknown)");
+            newCharacter.BirthLocation = Logic.FindOrCreateLocation(story, Console.ReadLine());
+
+            Console.WriteLine("Where does the character die? (Leave blank if unknown)");
+            newCharacter.DeathLocation = Logic.FindOrCreateLocation(story, Console.ReadLine());
+
+            newCharacter.Tags.AddRange(CollectTags(story, newCharacter.Name ?? "this character"));
 
             return newCharacter;
+        }
+                
+        // asks for tag names one per line; reuses tags the Story already has, creates (and colours) new ones
+        public static List<Tag> CollectTags(Story story, string itemName)
+        {
+            List<Tag> chosenTags = new List<Tag>();
+            Console.WriteLine($"Add tags to {itemName} (one per line, press Enter on an empty line when done)");
+
+            string? tagName = Console.ReadLine();
+            while (!string.IsNullOrWhiteSpace(tagName))
+            {
+                Tag? tag = Logic.FindTag(story, tagName);
+                if (tag == null)
+                {
+                    string color = SelectTagColor(tagName.Trim());
+                    tag = Logic.CreateTag(story, tagName, color);
+                }
+                else
+                {
+                    Console.WriteLine($"Using existing tag '{tag.Name}' ({tag.Color})");
+                }
+
+                if (!chosenTags.Contains(tag)) // don't add the same tag twice to one item
+                {
+                    chosenTags.Add(tag);
+                }
+                tagName = Console.ReadLine();
+            }
+            return chosenTags;
+        }
+
+        // asks the user to pick a colour for a new tag and returns it as a hex string
+        public static string SelectTagColor(string tagName)
+        {
+            string[] colorNames = { "Red", "Orange", "Yellow", "Green", "Blue", "Purple", "Grey" };
+            string[] colorHex = { "#E5533D", "#F2994A", "#F2C94C", "#27AE60", "#2F80ED", "#9B51E0", "#808080" };
+
+            Console.WriteLine($"'{tagName}' is a new tag. Pick a colour:");
+            for (int i = 0; i < colorNames.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}: {colorNames[i]}");
+            }
+
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 1 || choice > colorNames.Length)
+            {
+                Console.WriteLine($"This is not a valid selection. Please enter a number from 1 to {colorNames.Length}.");
+            }
+            return colorHex[choice - 1];
+        }
+
+        // shows every value of an enum as a numbered menu and returns the one the user picks (0 = Unknown)
+        public static T SelectFromEnum<T>(string question) where T : struct, Enum
+        {
+            T[] options = Enum.GetValues<T>();
+            Console.WriteLine(question);
+            for (int i = 0; i < options.Length; i++)
+            {
+                Console.WriteLine($"{i}: {options[i]}");
+            }
+
+            int choice;
+            while (!int.TryParse(Console.ReadLine(), out choice) || choice < 0 || choice >= options.Length)
+            {
+                Console.WriteLine($"This is not a valid selection. Please enter a number from 0 to {options.Length - 1}.");
+            }
+            return options[choice];
+        }
+
+        // collects items one per line, until the user presses Enter on an empty line
+        public static List<string> CollectList(string question)
+        {
+            List<string> items = new List<string>();
+            Console.WriteLine($"{question} (one per line, press Enter on an empty line when done)");
+
+            string? item = Console.ReadLine();
+            while (!string.IsNullOrWhiteSpace(item))
+            {
+                items.Add(item.Trim());
+                item = Console.ReadLine();
+            }
+            return items;
+        }
+
+        // prints everything stored about one character
+        public static void DisplayCharacter(Character character)
+        {
+            Console.WriteLine($"\n===== {character.Name} =====");
+            Console.WriteLine($"Role: {character.Role}");
+            Console.WriteLine($"Age: {(character.Age.HasValue ? character.Age.ToString() : "unknown")}");
+            Console.WriteLine($"Occupation: {character.Occupation}");
+            Console.WriteLine($"Status: {character.status}");
+            Console.WriteLine($"Personality: {character.Personality}");
+            Console.WriteLine($"Height: {character.Height}   Weight: {character.Weight}");
+            Console.WriteLine($"Sex: {character.Sex}   Ethnicity: {character.Race}");
+            Console.WriteLine($"Emotions: {character.emotions}");
+            Console.WriteLine($"Likes: {string.Join(", ", character.Likes)}");
+            Console.WriteLine($"Dislikes: {string.Join(", ", character.Dislikes)}");
+            Console.WriteLine($"Goals: {string.Join(", ", character.CharactersGoals)}");
+            Console.WriteLine($"Lives in: {character.Residency?.Name ?? "unknown"}");
+            Console.WriteLine($"Born in: {character.BirthLocation?.Name ?? "unknown"}");
+            Console.WriteLine($"Dies in: {character.DeathLocation?.Name ?? "unknown"}");
+            Console.WriteLine($"Backstory: {character.CharacterBackStory}");
+
+            List<string>tagLabels = new List<string>();
+            foreach (Tag tag in character.Tags)
+            {
+                tagLabels.Add($"{tag.Name} ({tag.Color})");
+            }
+            Console.WriteLine($"Tags: {string.Join(", ", tagLabels)}");
         }
     }
 }

@@ -8,7 +8,7 @@ namespace StoryOrganizer
 {
     public class Character
     {
-        public List<Tag>? Tags { get; set; }
+        public List<Tag> Tags { get; set; } = new List<Tag>(); // points to tags in Story.Tags, never new ones 
         private string? _characterBackStory;
 
         public CharacterRole Role { get; set; }
