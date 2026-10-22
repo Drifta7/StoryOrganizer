@@ -12,5 +12,6 @@ namespace StoryOrganizer
         // ideas to the story, most likey to be color coded and will be a visual aid and Part of the UI 
         public string Name { get; set; } = string.Empty;
         public string Color { get; set; } = "#808080"; // hex color for UI,  eg: "#E5533D" (red); grey until chosen
+
     }
 }

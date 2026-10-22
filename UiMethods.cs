@@ -15,7 +15,7 @@ namespace StoryOrganizer
         {
             Console.WriteLine("Welcome to StoryOrganizer");
         }
-        
+
         public static int UserModeSelection() // used for Mode selection 
         {
             Console.WriteLine("\nCreate a Story Selection Mode");
@@ -53,12 +53,31 @@ namespace StoryOrganizer
             Console.WriteLine("Please Create a Tag for oraganisation purposes ");
             // wondering if I should place tag objs in here?
         }
-       
+
         public static char AskingUserToAddAags()
         {
             Console.WriteLine("Do you want to add a Tag?");
             char userSelection = 'a';
             return userSelection;
+        }
+        public static char ValidateUserAnswerToYesNo()
+        {
+            bool isUserAnsEitherYOrN = false;
+            char yesOrNoAnswer = char.ToUpper(Console.ReadKey().KeyChar);
+
+            do
+            {
+                if (yesOrNoAnswer != Constants._YES && yesOrNoAnswer != Constants._NO)
+                {
+                    Console.WriteLine("this isn't the correct response, Please try again ");
+                    yesOrNoAnswer = char.ToUpper(Console.ReadKey().KeyChar);
+                }
+                else
+                    isUserAnsEitherYOrN = true;
+
+            } while (!isUserAnsEitherYOrN);
+
+            return yesOrNoAnswer;
         }
 
 
@@ -104,7 +123,7 @@ namespace StoryOrganizer
                 text += Console.ReadLine() + "\n"; // added += because the when an idea is placed it will not get replaced 
 
                 Console.WriteLine($"Are you done or statisfied with what you ahev for {sectionName} (Y/N)");
-                isUserDone = Logic.ValidateUserAnswerToYesNo() == Constants._YES;
+                isUserDone = ValidateUserAnswerToYesNo() == Constants._YES;
                 Console.WriteLine();
             }
             return text;
@@ -202,11 +221,11 @@ namespace StoryOrganizer
                     break;
             }
         }
-      
+
         //BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
         //BrainStormDump IdeaDump = new BrainStormDump(); //object of BrainStormDump
 
-        public static void DisplayingTheBrainDumps(BrainDumpManager dumpManager)
+        public static void DisplayingTheBrainDumps(IdeaCanvasManager dumpManager)
         {
             int indexedNumber = 1;
             var dumps = dumpManager.GetList();
@@ -270,19 +289,19 @@ namespace StoryOrganizer
             newCharacter.CharactersGoals.AddRange(CollectList($"What are {newCharacter.Name}'s goals?"));
 
             Console.WriteLine("Where does the character live? (Leave blank if unknown)");
-            newCharacter.Residency = Logic.FindOrCreateLocation(story, Console.ReadLine());
+            newCharacter.Residency = StoryCategory.FindOrCreateLocation(story, Console.ReadLine());
 
             Console.WriteLine("Where was the Character born? (Leave blank if unknown)");
-            newCharacter.BirthLocation = Logic.FindOrCreateLocation(story, Console.ReadLine());
+            newCharacter.BirthLocation = StoryCategory.FindOrCreateLocation(story, Console.ReadLine());
 
             Console.WriteLine("Where does the character die? (Leave blank if unknown)");
-            newCharacter.DeathLocation = Logic.FindOrCreateLocation(story, Console.ReadLine());
+            newCharacter.DeathLocation = StoryCategory.FindOrCreateLocation(story, Console.ReadLine());
 
             newCharacter.Tags.AddRange(CollectTags(story, newCharacter.Name ?? "this character"));
 
             return newCharacter;
         }
-                
+             
         // asks for tag names one per line; reuses tags the Story already has, creates (and colours) new ones
         public static List<Tag> CollectTags(Story story, string itemName)
         {
@@ -292,11 +311,11 @@ namespace StoryOrganizer
             string? tagName = Console.ReadLine();
             while (!string.IsNullOrWhiteSpace(tagName))
             {
-                Tag? tag = Logic.FindTag(story, tagName);
+                Tag? tag = Story.FindTag(story, tagName);
                 if (tag == null)
                 {
                     string color = SelectTagColor(tagName.Trim());
-                    tag = Logic.CreateTag(story, tagName, color);
+                    tag = Story.CreateTag(story, tagName, color);
                 }
                 else
                 {
@@ -385,7 +404,7 @@ namespace StoryOrganizer
             Console.WriteLine($"Dies in: {character.DeathLocation?.Name ?? "unknown"}");
             Console.WriteLine($"Backstory: {character.CharacterBackStory}");
 
-            List<string>tagLabels = new List<string>();
+            List<string> tagLabels = new List<string>();
             foreach (Tag tag in character.Tags)
             {
                 tagLabels.Add($"{tag.Name} ({tag.Color})");

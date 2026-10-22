@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace StoryOrganizer
 {
-    public class BrainDumpManager
+    public class IdeaCanvasManager
     {
-        private List<BrainStormDump> UserIdeasAreaList = new List<BrainStormDump>();   // creates new list set named BrainDumpList
+        private List<IdeaCanvasDump> UserIdeasAreaList = new List<IdeaCanvasDump>();   // creates new list set named BrainDumpList
 
-        public void AddBrainDump(BrainStormDump dump)
+        public void AddIdeaCanvasDump(IdeaCanvasDump dump)
         {
             UserIdeasAreaList.Add(dump); // adds User Entry to the BrainDumplist
         }
 
-        public List<BrainStormDump> GetList() // get the list from passOn object in that Main()
+        public List<IdeaCanvasDump> GetList() // get the list from passOn object in that Main()
         {
             return UserIdeasAreaList;
         }

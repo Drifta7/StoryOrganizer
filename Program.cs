@@ -25,8 +25,8 @@ namespace StoryOrganizer
             // here create a method that asked the question about the selection that the user picked
             //psudeoMethodHere();
 
-            BrainStormDump idea = new BrainStormDump();
-            BrainDumpManager passOn = new BrainDumpManager();
+            IdeaCanvasDump idea = new IdeaCanvasDump();
+            IdeaCanvasManager passOn = new IdeaCanvasManager();
 
             int UserSelectionMode = UiMethods.UserModeSelection();
 
@@ -36,14 +36,14 @@ namespace StoryOrganizer
                 while (!isUserDoneBrainStorming)
                 {
                     //Adds to the User Ideas to a list when Brainstorming
-                    BrainStormDump dumpEntry = new BrainStormDump();
+                    IdeaCanvasDump dumpEntry = new IdeaCanvasDump();
 
                     Logic.UserDrivenInputToClass(dumpEntry); // asks for ideas and stores them in dumpEntry
 
-                    passOn.AddBrainDump(dumpEntry); // stores the finished batch
+                    passOn.AddIdeaCanvasDump(dumpEntry); // stores the finished batch
                     UiMethods.AskIfUserIsDoneQuestion();
 
-                    char userYesOrNoAns = Logic.ValidateUserAnswerToYesNo();
+                    char userYesOrNoAns = UiMethods.ValidateUserAnswerToYesNo();
                     UiMethods.ClearUserEntry();
 
                     isUserDoneBrainStorming = userYesOrNoAns == Constants._YES;
@@ -124,7 +124,7 @@ namespace StoryOrganizer
                     story.Characters.Add(newCharacter); // the Story owns this character
 
                     Console.WriteLine("\nDo you want to create another character? (Y/N)");
-                    isUserDoneCreatingCharacters = Logic.ValidateUserAnswerToYesNo() == Constants._NO;
+                    isUserDoneCreatingCharacters = UiMethods.ValidateUserAnswerToYesNo() == Constants._NO;
                     Console.WriteLine();
                 }
 

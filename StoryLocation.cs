@@ -9,7 +9,7 @@ namespace StoryOrganizer
 {
     public class StoryLocation
     {
-        public List<Tag>? Tags { get; set; } // tags for location(s)
+        public List<Tag>? Tags { get; set; } = new List<Tag>();  //points to tags in Story.Tags, never new ones
        
         public string? Description { get; set; }
 

@@ -8,7 +8,7 @@ namespace StoryOrganizer
 {
     public class PlotTwist
     {
-        public List<Tag> Tags { get; set; }
+        public List<Tag>? Tags { get; set; }
         public string Description { get; set; } = string.Empty;
         public Events? RevealEvent { get; set; }
         public List<Events> ForeshadowEvents { get; set; } = new List<Events>();
