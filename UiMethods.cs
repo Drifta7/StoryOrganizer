@@ -18,7 +18,7 @@ namespace StoryOrganizer
 
         public static int UserModeSelection() // used for Mode selection 
         {
-            Console.WriteLine("\nCreate a Story Selection Mode");
+            Console.WriteLine("\nCreate a Story in Selection Mode");
             // might have to use the try catch method just incase the exception us Unhandled 
 
             Console.WriteLine("1: Brain Dump\n2: Create the Plot\n3: Tags\n4: Create a Character");
@@ -102,8 +102,8 @@ namespace StoryOrganizer
         // both of these are linked together 
         public static int PlotModeSelection()
         {
-            Console.WriteLine("\nWhich part of the plot do you wnat to work on?");
-            Console.WriteLine("1: Beginning\n2: Middle\n 3: Ending\n4: Climax\n5: Plot Twist\n6: Possible Fillers\n7: Plot Progression\n0: Done");
+            Console.WriteLine("\nWhich part of the plot do you want to work on?");
+            Console.WriteLine("1: Beginning\n2: Middle\n3: Ending\n4: Climax\n5: Plot Twist\n6: Possible Fillers\n7: Plot Progression\n0: Done");
             int userSelection;
             while (!int.TryParse(Console.ReadLine(), out userSelection) || userSelection < Constants.PLOT_DONE ||
                     userSelection > Constants.PLOT_PROGRESSION_MODE)
@@ -122,7 +122,7 @@ namespace StoryOrganizer
                 Console.WriteLine($"Write some ideas for the {sectionName}:");
                 text += Console.ReadLine() + "\n"; // added += because the when an idea is placed it will not get replaced 
 
-                Console.WriteLine($"Are you done or statisfied with what you ahev for {sectionName} (Y/N)");
+                Console.WriteLine($"Are you done or statisfied with what you have for {sectionName} (Y/N)");
                 isUserDone = ValidateUserAnswerToYesNo() == Constants._YES;
                 Console.WriteLine();
             }

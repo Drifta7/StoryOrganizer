@@ -57,6 +57,8 @@ namespace StoryOrganizer
                         Console.WriteLine(List);
                     }
                 }
+
+                UiMethods.UserModeSelection();
             }
 
             if (UserSelectionMode == Constants.CREATING_PLOT_MODE)
@@ -112,6 +114,7 @@ namespace StoryOrganizer
 
             if (UserSelectionMode == Constants.CREATING_TAGS_ID_CARDS)
             {
+
                 Console.WriteLine(" 3rd Selection worked and this is the result ");
             }
 
