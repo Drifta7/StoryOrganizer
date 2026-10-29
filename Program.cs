@@ -7,7 +7,7 @@ namespace StoryOrganizer
     {
         static void Main(string[] args)
         {
-            Story story = new Story(); // create an instance of the object for Story class
+            Story story = SampleStoryTester.Create(); // create an instance of the object for Story class
             StoryLocation Location = new StoryLocation();
             bool isUserDoneBrainStorming = false;
 
