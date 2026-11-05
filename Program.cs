@@ -34,7 +34,7 @@ namespace StoryOrganizer
             {
 
                 while (!isUserDoneBrainStorming)
-                {
+                {   
                     //Adds to the User Ideas to a list when Brainstorming
                     IdeaCanvasDump dumpEntry = new IdeaCanvasDump();
 
@@ -111,12 +111,8 @@ namespace StoryOrganizer
 
                 UiMethods.DisplayPlot(story.Plot); // shows everything that was stored in the Story
             }
-
-            if (UserSelectionMode == Constants.CREATING_TAGS_ID_CARDS)
-            {
-
-                Console.WriteLine(" 3rd Selection worked and this is the result ");
-            }
+            // probably might not need this  
+          
 
             if (UserSelectionMode == Constants.CREATING_CHARACTER_MODE)
             {

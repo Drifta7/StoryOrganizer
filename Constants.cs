@@ -33,7 +33,7 @@ namespace StoryOrganizer
 
         public const int BRAIN_DUMP_MODE_SELECTION = 1;
         public const int CREATING_PLOT_MODE = 2;
-        public const int CREATING_TAGS_ID_CARDS = 3;
+       
         public const int CREATING_CHARACTER_MODE = 4;
 
         public const int BEGINNING_MODE = 1;

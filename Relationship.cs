@@ -24,5 +24,13 @@ namespace StoryOrganizer
         Mentor,
         Rival,
         Employer,
+        Associates,
+        Enemy,
+        Acquaintances,
+        Toxic,
+        CoDependent,
+        Abusive,
+        Sexual,
+        LongDistance,
     }
 }

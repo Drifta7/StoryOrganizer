@@ -87,8 +87,7 @@ namespace StoryOrganizer
             bool isUserSelectionValid = false;
             do
             {
-                if (userSelection != Constants.BRAIN_DUMP_MODE_SELECTION && userSelection != Constants.CREATING_PLOT_MODE
-                    && userSelection != Constants.CREATING_TAGS_ID_CARDS)
+                if (userSelection != Constants.BRAIN_DUMP_MODE_SELECTION && userSelection != Constants.CREATING_PLOT_MODE)
                 {
                     Console.WriteLine($"This {userSelection} is not the correct choice, please choose from the list\n");
                     //here add the list (subject to change)
@@ -250,6 +249,8 @@ namespace StoryOrganizer
             newCharacter.Name = Console.ReadLine();
 
             newCharacter.Role = SelectFromEnum<CharacterRole>($"\nWhat role does {newCharacter.Name} play in the story?");
+            // does it make sense to put in the miscellaneous <List> here?????
+            // this should be an option to ADD to the Enums (plan this out).
 
             Console.WriteLine($"Create a backstory for {newCharacter.Name} ");
             newCharacter.CharacterBackStory = Console.ReadLine(); // creates a back story for the (main) character 
@@ -301,14 +302,14 @@ namespace StoryOrganizer
 
             return newCharacter;
         }
-             
+
         // asks for tag names one per line; reuses tags the Story already has, creates (and colours) new ones
         public static List<Tag> CollectTags(Story story, string itemName)
         {
             List<Tag> chosenTags = new List<Tag>();
             Console.WriteLine($"Add tags to {itemName} (one per line, press Enter on an empty line when done)");
 
-            string? tagName = Console.ReadLine();
+            string? tagName = Console.ReadLine(); // give the tag a name 
             while (!string.IsNullOrWhiteSpace(tagName))
             {
                 Tag? tag = Story.FindTag(story, tagName);
