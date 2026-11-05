@@ -16,6 +16,7 @@ namespace StoryOrganizer
         public StoryPhase Phase { get; set; } // related to the enums
 
         public string? Description { get; set; }
+        public List<string> UserDefinedEvents { get; set; } = new List<string> { };// incase the user doesn't use the enum and wants to make their own
 
         public List<Character> CharactersInvolvedInEvent { get; set; } = new List<Character>(); // characters involved in the event 
         public List<StoryLocation> LocationOfEvent { get; set; } = new List<StoryLocation>();// where the Event takes place withing the story
