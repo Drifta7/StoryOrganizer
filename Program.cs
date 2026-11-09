@@ -8,11 +8,14 @@ namespace StoryOrganizer
         static void Main(string[] args)
         {
             Story story = SampleStoryTester.Create(); // create an instance of the object for Story class
-            StoryLocation Location = new StoryLocation();
+            UiMethods.DisplayStory(story); // shows everything the sample story (for testing)
+           
+            StoryLocation Location = new StoryLocation(); // the object for 
             bool isUserDoneBrainStorming = false;
 
             UiMethods.UserGreeting();
             UiMethods.DisplayCategories();
+           
 
             char AnswerForCharacterSelection = Logic.ValidateUserSelectionInMenu(UiMethods.UserSelectionChar());
 
@@ -130,7 +133,7 @@ namespace StoryOrganizer
                 Console.WriteLine($"\nCharacters in the story: {story.Characters.Count}");
                 foreach (Character character in story.Characters)
                 {
-                    UiMethods.DisplayCharacter(character);
+                     UiMethods.DisplayCharacter(character);
                 }
 
                 Console.WriteLine($"\nLocations in the story: {story.Locations.Count}");

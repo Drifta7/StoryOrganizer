@@ -15,7 +15,7 @@ namespace StoryOrganizer
 
         public StoryLocation? Parent { get; set; }
 
-        public string Name { get; set; } = String.Empty;
+        public string Name { get; set; } = String.Empty; // String.Empty provides a valid, blank string,which in turn can use length or other string operations
         
         private string? _address;
         public string Address

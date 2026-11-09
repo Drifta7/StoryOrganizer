@@ -18,7 +18,7 @@ namespace StoryOrganizer
         public List<StoryItem> Items { get; } = new List<StoryItem>();
         public List<Tag> Tags { get; } = new List<Tag>(); // Master list: every tag in the story is created once, here 
 
-         public static Tag? FindTag(Story story, string tagName)
+        public static Tag? FindTag(Story story, string tagName)
         {
             foreach (Tag tag in story.Tags)
             {

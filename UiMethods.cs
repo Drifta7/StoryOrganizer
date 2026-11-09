@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -128,23 +129,6 @@ namespace StoryOrganizer
             return text;
         }
 
-        // prints every part of the plot so the user can see what was stored
-        public static void DisplayPlot(PlotSystem plot)
-        {
-            Console.WriteLine("\n===== Your Plot =====");
-            Console.WriteLine($"Beginning:\n{plot.Beginning}");
-            Console.WriteLine($"Middle:\n{plot.Middle}");
-            Console.WriteLine($"Ending:\n{plot.Ending}");
-            Console.WriteLine($"Climax:\n{plot.Climax}");
-            Console.WriteLine($"Possible Fillers:\n{plot.PossibleFillers}");
-            Console.WriteLine($"Plot Progression:\n{plot.PlotPrgression}");
-            Console.WriteLine($"Plot Twists ({plot.PlotTwists.Count}):");
-
-            for (int i = 0; i < plot.PlotTwists.Count; i++)
-            {
-                Console.WriteLine($" {i + 1}. {plot.PlotTwists[i].Description}");
-            }
-        }
         public static void AskIfUserIsDoneQuestion()
         {
             Console.WriteLine("Is user Done Brainstroming?\nSelect Y/N\n");
@@ -385,6 +369,24 @@ namespace StoryOrganizer
             return items;
         }
 
+        // prints every part of the plot so the user can see what was stored
+        public static void DisplayPlot(PlotSystem plot)
+        {
+            Console.WriteLine("\n===== Your Plot =====");
+            Console.WriteLine($"Beginning:\n{plot.Beginning}");
+            Console.WriteLine($"Middle:\n{plot.Middle}");
+            Console.WriteLine($"Ending:\n{plot.Ending}");
+            Console.WriteLine($"Climax:\n{plot.Climax}");
+            Console.WriteLine($"Possible Fillers:\n{plot.PossibleFillers}");
+            Console.WriteLine($"Plot Progression:\n{plot.PlotPrgression}");
+            Console.WriteLine($"Plot Twists ({plot.PlotTwists.Count}):");
+
+            for (int i = 0; i < plot.PlotTwists.Count; i++)
+            {
+                Console.WriteLine($" {i + 1}. {plot.PlotTwists[i].Description}");
+            }
+        }
+
         // prints everything stored about one character
         public static void DisplayCharacter(Character character)
         {
@@ -411,6 +413,137 @@ namespace StoryOrganizer
                 tagLabels.Add($"{tag.Name} ({tag.Color})");
             }
             Console.WriteLine($"Tags: {string.Join(", ", tagLabels)}");
+        }
+
+        // prints everything stored in the story, section by section
+        public static void DisplayStory(Story story)
+        {
+            Console.WriteLine($"\n######## {story.Title} ########");
+
+            // ---------- CHARACTERS ----------
+            Console.WriteLine($"\n---------- Characters ({story.Characters.Count}) ----------");
+            foreach (Character character in story.Characters)
+            {
+                DisplayCharacter(character);
+            }
+
+            // ---------- LOCATIONS ----------
+            Console.WriteLine($"\n---------- Locations ({story.Locations.Count}) ----------");
+            foreach (StoryLocation location in story.Locations)
+            {
+                Console.WriteLine($"\n{location.Name}");
+                Console.WriteLine($"  Description: {location.Description}");
+                Console.WriteLine($"  Inside: {location.Parent?.Name ?? "none"}");
+                Console.WriteLine($"  Tags: {TagNames(location.Tags)}");
+            }
+
+            // ---------- TAGS ----------
+            Console.WriteLine($"\n---------- Tags ({story.Tags.Count}) ----------");
+            foreach (Tag tag in story.Tags)
+            {
+                Console.WriteLine($"  {tag.Name} ({tag.Color})");
+            }
+
+            // ---------- PLOT ----------
+            Console.WriteLine("\n---------- Plot ----------");
+            DisplayPlot(story.Plot);
+
+            // ---------- EVENTS ----------
+            Console.WriteLine($"\n---------- Events ({story.Events.Count}) ----------");
+            foreach (Events storyEvent in story.Events)
+            {
+                Console.WriteLine($"\n{storyEvent.Order}. {storyEvent.Title}   [{storyEvent.Type} / {storyEvent.Phase}]");
+                Console.WriteLine($"  Description: {storyEvent.Description}");
+
+                List<string> characterNames = new List<string>();
+                foreach (Character character in storyEvent.CharactersInvolvedInEvent)
+                {
+                    characterNames.Add(character.Name ?? "unnamed");
+                }
+                Console.WriteLine($"  Characters: {string.Join(", ", characterNames)}");
+
+                List<string> locationNames = new List<string>();
+                foreach (StoryLocation location in storyEvent.LocationOfEvent)
+                {
+                    locationNames.Add(location.Name);
+                }
+                Console.WriteLine($"  Where: {string.Join(" -> ", locationNames)}");
+
+                List<string> causes = new List<string>();
+                foreach (Events cause in storyEvent.CausedBy)
+                {
+                    causes.Add($"{cause.Order}. {cause.Title}");
+                }
+                Console.WriteLine($"  Caused by: {(causes.Count > 0 ? string.Join(", ", causes) : "nothing")}");
+
+                if (storyEvent.UserDefinedEvents.Count > 0)
+                {
+                    Console.WriteLine($"  Custom types: {string.Join(", ", storyEvent.UserDefinedEvents)}");
+                }
+                Console.WriteLine($"  Tags: {TagNames(storyEvent.Tags)}");
+            }
+
+            // ---------- PLOT TWISTS (in detail) ----------
+            Console.WriteLine($"\n---------- Plot Twists ({story.Plot.PlotTwists.Count}) ----------");
+            foreach (PlotTwist twist in story.Plot.PlotTwists)
+            {
+                Console.WriteLine($"\n{twist.Description}");
+                Console.WriteLine($"  Revealed in: {twist.RevealEvent?.Title ?? "not decided"}");
+
+                List<string> hints = new List<string>();
+                foreach (Events hint in twist.ForeshadowEvents)
+                {
+                    hints.Add(hint.Title ?? "untitled");
+                }
+                Console.WriteLine($"  Foreshadowed in: {(hints.Count > 0 ? string.Join(", ", hints) : "nothing yet")}");
+
+                List<string> twistCharacters = new List<string>();
+                foreach (Character character in twist.CharatersInPlotTwist)
+                {
+                    twistCharacters.Add(character.Name ?? "unnamed");
+                }
+                Console.WriteLine($"  Characters: {string.Join(", ", twistCharacters)}");
+
+                List<string> twistPlaces = new List<string>();
+                foreach (StoryLocation location in twist.WhereThePlotTwistHappens)
+                {
+                    twistPlaces.Add(location.Name);
+                }
+                Console.WriteLine($"  Where: {string.Join(", ", twistPlaces)}");
+                Console.WriteLine($"  Tags: {TagNames(twist.Tags)}");
+            }
+
+            // ---------- RELATIONSHIPS ----------
+            Console.WriteLine($"\n---------- Relationships ({story.Relationships.Count}) ----------");
+            foreach (Relationship relationship in story.Relationships)
+            {
+                string secret = relationship.IsSecret ? "  (secret)" : "";
+                Console.WriteLine($"  {relationship.From?.Name ?? "unknown"} -> {relationship.To?.Name ?? "unknown"}: {relationship.Type}, {relationship.Description}{secret}");
+            }
+
+            // ---------- ITEMS ----------
+            Console.WriteLine($"\n---------- Items ({story.Items.Count}) ----------");
+            foreach (StoryItem item in story.Items)
+            {
+                Console.WriteLine($"  {item.Name}: {item.Description}");
+                Console.WriteLine($"    Owner: {item.Owner?.Name ?? "none"}   Location: {item.Location?.Name ?? "unknown"}");
+            }
+        }
+
+        // turns a list of tags into "name, name, name" (or "none"); the list itself may be empty or missing
+        private static string TagNames(List<Tag>? tags)
+        {
+            if (tags == null || tags.Count == 0)
+            {
+                return "none";
+            }
+
+            List<string> names = new List<string>();
+            foreach (Tag tag in tags)
+            {
+                names.Add(tag.Name);
+            }
+            return string.Join(", ", names);
         }
     }
 }
