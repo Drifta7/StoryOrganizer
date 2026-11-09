@@ -15,6 +15,6 @@ namespace StoryOrganizer
 
         public List<Character> CharatersInPlotTwist { get; set; } = new List<Character>(); // are they the same characters within the orginal plot?
 
-        public List<StoryLocation> WhereThePlotTwistHappens { get; set; } = new List<StoryLocation>();
+        public List<StoryLocation> WhereThePlotTwistHappens { get; set; } = new List<StoryLocation>(); 
     }
 }
