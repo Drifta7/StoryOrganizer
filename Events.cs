@@ -21,7 +21,7 @@ namespace StoryOrganizer
         public List<Character> CharactersInvolvedInEvent { get; set; } = new List<Character>(); // characters involved in the event 
         public List<StoryLocation> LocationOfEvent { get; set; } = new List<StoryLocation>();// where the Event takes place withing the story
 
-        public List<Story> MiscellaneousEvents { get; set; } = new List<Story>();// this is for extra events that are not covered by enums.
+        public List<Events> MiscellaneousEvents { get; set; } = new List<Events>();// this is for extra events, more of a throw away events for the user to brainstorm 
 
     }
     public enum EventType

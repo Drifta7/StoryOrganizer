@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
-using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace StoryOrganizer
 {
-    public class UiMethods
+    public static class UiMethods
     {
         public static void UserGreeting()
         {
@@ -37,6 +35,24 @@ namespace StoryOrganizer
             Console.WriteLine($" You Have selected {UserModeSelection}");
             return UserModeSelection;
         }
+        public static string? UserDefinedGenre()
+        {
+            bool isThereNoWhiteSpaceNullOrEmpty = false;
+            Console.WriteLine("Type you own genre..");
+            string? UserInput = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(UserInput) && string.IsNullOrWhiteSpace(UserInput))
+            {
+                Console.WriteLine("There is no genre placed into the field please enter again");
+                UserInput = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(UserInput) && !string.IsNullOrEmpty(UserInput))
+                {
+                    isThereNoWhiteSpaceNullOrEmpty = true;
+                }
+            }
+            return UserInput;
+        }
 
         public static void ClearUserEntry()
         {
@@ -45,22 +61,16 @@ namespace StoryOrganizer
         public static string AskUserAboutIdea()
         {
             Console.WriteLine("What Idea(s) would you like to put out?\n");
-            string? UserAnswer = Console.ReadLine();
+            string? UserAnswer = Console.ReadLine() ?? string.Empty;
             return UserAnswer;
         }
 
         public static void AskingUserToCreateTags()
         {
-            Console.WriteLine("Please Create a Tag for oraganisation purposes ");
+            Console.WriteLine("Please Create a Tag for organization purposes ");
             // wondering if I should place tag objs in here?
         }
 
-        public static char AskingUserToAddAags()
-        {
-            Console.WriteLine("Do you want to add a Tag?");
-            char userSelection = 'a';
-            return userSelection;
-        }
         public static char ValidateUserAnswerToYesNo()
         {
             bool isUserAnsEitherYOrN = false;
@@ -80,25 +90,29 @@ namespace StoryOrganizer
 
             return yesOrNoAnswer;
         }
-
-
-        // might use this for mode when constructing story user mode
-        public static int ValidateSelectionMode(int userSelection)
+        public static char ValidateUserSelectionInMenu(char validateUserEntry)
         {
-            bool isUserSelectionValid = false;
+            bool hasUserChoosenChar = false;
+            char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
+            Console.WriteLine();// used to create another line 
             do
             {
-                if (userSelection != Constants.BRAIN_DUMP_MODE_SELECTION && userSelection != Constants.CREATING_PLOT_MODE)
+                if (upperChar != Constants.A_SELECTION && upperChar != Constants.B_SELECTION
+                   && upperChar != Constants.C_SELECTION && upperChar != Constants.D_SELECTION)
                 {
-                    Console.WriteLine($"This {userSelection} is not the correct choice, please choose from the list\n");
-                    //here add the list (subject to change)
+                    Console.WriteLine("This isn't the correct entry please try again");
+                    upperChar = char.ToUpper(Console.ReadKey().KeyChar); //  User re-entry 
                 }
                 else
-                    isUserSelectionValid = true;
+                    hasUserChoosenChar = true;
+
             }
-            while (!isUserSelectionValid);
-            return userSelection;
+            while (!hasUserChoosenChar);
+            return upperChar;
         }
+
+        // might use this for mode when constructing story user mode // was told to get rid of this but might need it 
+
         // both of these are linked together 
         public static int PlotModeSelection()
         {
@@ -134,24 +148,6 @@ namespace StoryOrganizer
             Console.WriteLine("Is user Done Brainstroming?\nSelect Y/N\n");
         }
 
-        // displays what the user has placed in userAnswer
-        public static void DisplayUserAnswer(string userAnswer)
-        {
-            Console.WriteLine(userAnswer);
-        }
-        //goals for the character... will put this into another method
-        public static string CharacterGoalInput()
-        {
-            string mainCharacterGoal = "";
-            return mainCharacterGoal;
-        }
-        //used for age of character
-        public static int NumberedUserInput()
-        {
-            int userInput = 0;
-            return userInput;
-        }
-
         public static char UserSelectionChar()
         {
             char userSelection = Console.ReadKey().KeyChar;
@@ -175,7 +171,7 @@ namespace StoryOrganizer
         }
 
         // this is the DisplayCategories() for the user 
-        public static void PrintWhatTheUserSelected(char userInput)
+        public static char PrintWhatTheUserSelected(char userInput)
         {
             switch (userInput)
             {
@@ -203,6 +199,7 @@ namespace StoryOrganizer
 
                     break;
             }
+            return userInput;
         }
 
         //BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
@@ -274,13 +271,13 @@ namespace StoryOrganizer
             newCharacter.CharactersGoals.AddRange(CollectList($"What are {newCharacter.Name}'s goals?"));
 
             Console.WriteLine("Where does the character live? (Leave blank if unknown)");
-            newCharacter.Residency = StoryCategory.FindOrCreateLocation(story, Console.ReadLine());
+            newCharacter.Residency = story.FindOrCreateLocation(Console.ReadLine());
 
             Console.WriteLine("Where was the Character born? (Leave blank if unknown)");
-            newCharacter.BirthLocation = StoryCategory.FindOrCreateLocation(story, Console.ReadLine());
+            newCharacter.BirthLocation = story.FindOrCreateLocation(Console.ReadLine());
 
             Console.WriteLine("Where does the character die? (Leave blank if unknown)");
-            newCharacter.DeathLocation = StoryCategory.FindOrCreateLocation(story, Console.ReadLine());
+            newCharacter.DeathLocation = story.FindOrCreateLocation(Console.ReadLine());
 
             newCharacter.Tags.AddRange(CollectTags(story, newCharacter.Name ?? "this character"));
 
@@ -296,11 +293,11 @@ namespace StoryOrganizer
             string? tagName = Console.ReadLine(); // give the tag a name 
             while (!string.IsNullOrWhiteSpace(tagName))
             {
-                Tag? tag = Story.FindTag(story, tagName);
+                Tag? tag = story.FindTag(tagName);
                 if (tag == null)
                 {
                     string color = SelectTagColor(tagName.Trim());
-                    tag = Story.CreateTag(story, tagName, color);
+                    tag = story.CreateTag(tagName, color);
                 }
                 else
                 {

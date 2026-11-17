@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StoryOrganizer
 {
-    public class SampleStoryTester
+    public static class SampleStoryTester
     {
         // builds a complete, hard-coded story so the UI has data to show without typing anything
         // order matters: anything that is pointed TO (locations, tags) is created before the things that point to it
@@ -31,10 +31,10 @@ namespace StoryOrganizer
             story.Locations.Add(halcyon);
 
             // ---------------- TAGS (created once in story.Tags) ----------------
-            Tag needsWork = Story.CreateTag(story, "needs-work", "#E5533D");       // red
-            Tag foreshadowing = Story.CreateTag(story, "foreshadowing", "#2F80ED"); // blue
-            Tag safeZone = Story.CreateTag(story, "safe-zone", "#27AE60");          // green
-            Tag danger = Story.CreateTag(story, "danger", "#F2994A");               // orange
+            Tag needsWork = story.CreateTag("needs-work", "#E5533D");       // red
+            Tag foreshadowing = story.CreateTag("foreshadowing", "#2F80ED"); // blue
+            Tag safeZone = story.CreateTag("safe-zone", "#27AE60");          // green
+            Tag danger = story.CreateTag("danger", "#F2994A");               // orange
 
             commandDeck.Tags?.Add(safeZone);
             hydroponics.Tags?.Add(safeZone);

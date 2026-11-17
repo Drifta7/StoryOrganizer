@@ -10,13 +10,13 @@ namespace StoryOrganizer
     // this is where the user will store their ideas with no reservations.
     public class IdeaCanvasDump
     {
-        public List <Tag> Tags { get; set; }
-      
+        public List<Tag> Tags { get; } = new List<Tag>();
+
         public List<string> DumpArea { get; set; }
-        
+
         public IdeaCanvasDump() // construtor
         {
-             DumpArea = new List<string>(); // this to displayed within the for each loop in Main() function/Method
+            DumpArea = new List<string>(); // this to displayed within the for each loop in Main() function/Method
         }
     }
 }

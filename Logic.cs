@@ -6,28 +6,9 @@ using System.Threading.Tasks;
 
 namespace StoryOrganizer
 {
-    internal class Logic
+    public static class Logic
     {
-        public static char ValidateUserSelectionInMenu(char validateUserEntry)
-        {
-            bool hasUserChoosenChar = false;
-            char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
-            Console.WriteLine();// used to create another line 
-            do
-            {
-                if (upperChar != Constants.A_SELECTION && upperChar != Constants.B_SELECTION
-                   && upperChar != Constants.C_SELECTION && upperChar != Constants.D_SELECTION)
-                {
-                    Console.WriteLine("This isn't the correct entry please try again");
-                    upperChar = char.ToUpper(Console.ReadKey().KeyChar); //  User re-entry 
-                }
-                else
-                    hasUserChoosenChar = true;
-
-            }
-            while (!hasUserChoosenChar);
-            return upperChar;
-        }
+       
         public static char ValidateUserSelection(char validateUserEntry)
         {
             char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
@@ -42,10 +23,6 @@ namespace StoryOrganizer
                 dump.DumpArea.Add(UiMethods.AskUserAboutIdea()); // this places the Ideas into DumpArea
             }
         }
-        // returns the location with this name from the Story, creating it (once) if it doesn't exist yet
-
-
-        // creates a new tag once and adds it to the Story's master list
 
         //public static int AgeLogicCalculator(int input, int ConstantInput) // age less or equal to OR greater than
         //{

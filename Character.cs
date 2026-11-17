@@ -34,12 +34,8 @@ namespace StoryOrganizer
         public List<string> Likes { get; set; } = new List<string>();
         public List<string> Dislikes { get; set; } = new List<string>();
 
-        public string CharacterBackStory // a small back story for characters
-        {
-            get { return _characterBackStory; }
-            set { _characterBackStory = value; }
-        }
-
+        public string? CharacterBackStory { get; set; } // a small back story for characters
+       
         // Character.Name = new Charcter();
     }
     public enum CharacterRole { Unknown, Protagonist, Antagonist, Mentor, Supporting, Minor }

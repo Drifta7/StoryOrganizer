@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,13 +21,5 @@ namespace StoryOrganizer
 
         public string? PossibleFillers { get; set; } // things that may develop the story, plot or characters
         public string? PlotPrgression { get; set; } // which characters and themes would push the plot further, as opposed to having the characters or events just exist
-        
-        public List<string> Plot  
-        {
-            get { return _plot; }
-            set { _plot = value; }
-        }
-
-
     }
 }

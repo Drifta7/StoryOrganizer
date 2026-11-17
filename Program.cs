@@ -7,28 +7,33 @@ namespace StoryOrganizer
     {
         static void Main(string[] args)
         {
+            // both methods to be later to be deleted
             Story story = SampleStoryTester.Create(); // create an instance of the object for Story class
             UiMethods.DisplayStory(story); // shows everything the sample story (for testing)
-           
-            StoryLocation Location = new StoryLocation(); // the object for 
+
             bool isUserDoneBrainStorming = false;
 
             UiMethods.UserGreeting();
             UiMethods.DisplayCategories();
-           
 
-            char AnswerForCharacterSelection = Logic.ValidateUserSelectionInMenu(UiMethods.UserSelectionChar());
+
+            char AnswerForCharacterSelection = UiMethods.ValidateUserSelectionInMenu(UiMethods.UserSelectionChar());
 
             Console.Clear();
 
-            UiMethods.PrintWhatTheUserSelected(AnswerForCharacterSelection);
+            char UserPickedSelection = UiMethods.PrintWhatTheUserSelected(AnswerForCharacterSelection);
+
+            Story StoreGenre = new Story();
+            // stored User Genre selection
+            StoreGenre.Genres.Add($"You've selected {UserPickedSelection} for the Genre");
+
+            StoryCategory.multiGenreStory.Add(UiMethods.UserDefinedGenre()); // work more on this for User multiple genres
 
             // place the logic Method here 
 
             // here create a method that asked the question about the selection that the user picked
             //psudeoMethodHere();
 
-            IdeaCanvasDump idea = new IdeaCanvasDump();
             IdeaCanvasManager passOn = new IdeaCanvasManager();
 
             int UserSelectionMode = UiMethods.UserModeSelection();
@@ -37,7 +42,7 @@ namespace StoryOrganizer
             {
 
                 while (!isUserDoneBrainStorming)
-                {   
+                {
                     //Adds to the User Ideas to a list when Brainstorming
                     IdeaCanvasDump dumpEntry = new IdeaCanvasDump();
 
@@ -115,7 +120,7 @@ namespace StoryOrganizer
                 UiMethods.DisplayPlot(story.Plot); // shows everything that was stored in the Story
             }
             // probably might not need this  
-          
+
 
             if (UserSelectionMode == Constants.CREATING_CHARACTER_MODE)
             {
@@ -133,7 +138,7 @@ namespace StoryOrganizer
                 Console.WriteLine($"\nCharacters in the story: {story.Characters.Count}");
                 foreach (Character character in story.Characters)
                 {
-                     UiMethods.DisplayCharacter(character);
+                    UiMethods.DisplayCharacter(character);
                 }
 
                 Console.WriteLine($"\nLocations in the story: {story.Locations.Count}");
@@ -155,7 +160,7 @@ namespace StoryOrganizer
                     Console.WriteLine($"- {tag.Name} ({tag.Color}) used by {usedBy} Character(s)");
                 }
             }
-            //UiMethods.DisplayingTheBrainDumps(passOn);
+            UiMethods.DisplayingTheBrainDumps(passOn); // look into this later
         }
     }
 }
