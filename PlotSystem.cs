@@ -1,17 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StoryOrganizer
+﻿namespace StoryOrganizer
 {
     public class PlotSystem
     {
         public List<Tag>? Tags { get; set; } // tags for the plot
 
-        private List<string> _plot { get; set; } = new List<string>(); // plot field.
 
         // user will get to choose either beginning, middle, end and work accordingly 
-
         public string? Beginning { get; set; } // start of the story
         public string? Middle { get; set; } // where the story developes, the meat and potatoes of the story 
         public string? Ending { get; set; } // where the stroy closes 

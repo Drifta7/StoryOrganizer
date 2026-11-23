@@ -1,9 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
-
-namespace StoryOrganizer
+﻿namespace StoryOrganizer
 {
     public class Story
     {
@@ -14,7 +9,7 @@ namespace StoryOrganizer
         public List<StoryLocation> Locations { get; } = new List<StoryLocation>();
         public List<string> CustomGenres { get; } = new List<string>();
 
-        public Genres genres { get; set; }
+        public List<Genre> Genres { get; } = new List<Genre>();
 
         public List<Events> Events { get; } = new List<Events>();
         public List<StoryItem> Items { get; } = new List<StoryItem>();
@@ -75,22 +70,24 @@ namespace StoryOrganizer
             Tags.Add(newTag);
             return newTag;
         }
-        public Story CheckingDoubleGenre(string? customGenre)
+        public bool TryAddCustomGenre(string? customGenre)
         {
-            if (string.IsNullOrEmpty(customGenre))
+            if (string.IsNullOrWhiteSpace(customGenre))// check if the user entry is blank or null
             {
-                return null;
+                return false;
             }
-            string trimmedCustom = customGenre.Trim();
-            foreach ( string genre in CustomGenres)
-            {
-                if (genre.Equals(trimmedCustom.Trim(), StringComparison.OrdinalIgnoreCase))
 
+            string trimmedCustom = customGenre.Trim(); // if something is there then run it throught the loop
+            foreach (string genre in CustomGenres)
+            {
+                if (genre.Equals(trimmedCustom, StringComparison.OrdinalIgnoreCase)) // if there are two of the same name
                 {
-                    return genre;
+                    return false;
                 }
             }
+            CustomGenres.Add(trimmedCustom);
+            return true;
         }
     }
-    public enum Genres { Fantsy, horror, adventure, ScienceFiction, romnace, OneShot  }
+    public enum Genre { Unknown, Fantasy, Horror, Adventure, ScienceFiction, Romance, Suspense, Noir, Cyberpunk, Comedy, Sports, Political, Inspirational, Religious }
 }

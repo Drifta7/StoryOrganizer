@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StoryOrganizer
+﻿namespace StoryOrganizer
 {
     public class StoryItem
     {
@@ -14,6 +7,6 @@ namespace StoryOrganizer
         public Character? Owner { get; set; } // who owns the item
 
         public StoryLocation? Location { get; set; }  // "items" that may be of use for the story and it's characters eg : special key, haunted building, 
-                                                             // book from the dark ages with spells.
+                                                      // book from the dark ages with spells.
     }
 }

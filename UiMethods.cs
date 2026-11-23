@@ -1,12 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StoryOrganizer
+﻿namespace StoryOrganizer
 {
     public static class UiMethods
     {
@@ -15,41 +7,39 @@ namespace StoryOrganizer
             Console.WriteLine("Welcome to StoryOrganizer");
         }
 
+        public static void TempMesseage()
+        {
+            Console.WriteLine("Tag mode coming soon?");
+        }
         public static int UserModeSelection() // used for Mode selection 
         {
             Console.WriteLine("\nCreate a Story in Selection Mode");
             // might have to use the try catch method just incase the exception us Unhandled 
 
-            Console.WriteLine("1: Brain Dump\n2: Create the Plot\n3: Tags\n4: Create a Character");
+            Console.WriteLine("1: Brain Dump\n2: Create the Plot\n3: Tags\n4: Create a Character\n0: Quit");
 
             int UserModeSelection;
-
+            // used to determine 0 and 4 selection 
             while (!int.TryParse(Console.ReadLine(), out UserModeSelection) ||
-                UserModeSelection < Constants.BRAIN_DUMP_MODE_SELECTION ||
+                UserModeSelection < Constants.QUIT_MODE ||
                 UserModeSelection > Constants.CREATING_CHARACTER_MODE)
             {
                 Console.WriteLine($"This is not a valid selection. Please enter a number within" +
-                    $" the menu from {Constants.BRAIN_DUMP_MODE_SELECTION}" +
+                    $" the menu from {Constants.QUIT_MODE}" +
                     $" to {Constants.CREATING_CHARACTER_MODE}");
             }
             Console.WriteLine($" You Have selected {UserModeSelection}");
             return UserModeSelection;
         }
-        public static string? UserDefinedGenre()
+        public static string UserDefinedGenre()
         {
-            bool isThereNoWhiteSpaceNullOrEmpty = false;
             Console.WriteLine("Type you own genre..");
             string? UserInput = Console.ReadLine();
 
-            while (string.IsNullOrEmpty(UserInput) && string.IsNullOrWhiteSpace(UserInput))
+            while (string.IsNullOrWhiteSpace(UserInput))
             {
                 Console.WriteLine("There is no genre placed into the field please enter again");
                 UserInput = Console.ReadLine();
-
-                if (!string.IsNullOrWhiteSpace(UserInput) && !string.IsNullOrEmpty(UserInput))
-                {
-                    isThereNoWhiteSpaceNullOrEmpty = true;
-                }
             }
             return UserInput;
         }
@@ -64,13 +54,7 @@ namespace StoryOrganizer
             string? UserAnswer = Console.ReadLine() ?? string.Empty;
             return UserAnswer;
         }
-
-        public static void AskingUserToCreateTags()
-        {
-            Console.WriteLine("Please Create a Tag for organization purposes ");
-            // wondering if I should place tag objs in here?
-        }
-
+       
         public static char ValidateUserAnswerToYesNo()
         {
             bool isUserAnsEitherYOrN = false;
@@ -90,30 +74,7 @@ namespace StoryOrganizer
 
             return yesOrNoAnswer;
         }
-        public static char ValidateUserSelectionInMenu(char validateUserEntry)
-        {
-            bool hasUserChoosenChar = false;
-            char upperChar = char.ToUpper(validateUserEntry); // makes the user entry letter uppercase
-            Console.WriteLine();// used to create another line 
-            do
-            {
-                if (upperChar != Constants.A_SELECTION && upperChar != Constants.B_SELECTION
-                   && upperChar != Constants.C_SELECTION && upperChar != Constants.D_SELECTION)
-                {
-                    Console.WriteLine("This isn't the correct entry please try again");
-                    upperChar = char.ToUpper(Console.ReadKey().KeyChar); //  User re-entry 
-                }
-                else
-                    hasUserChoosenChar = true;
 
-            }
-            while (!hasUserChoosenChar);
-            return upperChar;
-        }
-
-        // might use this for mode when constructing story user mode // was told to get rid of this but might need it 
-
-        // both of these are linked together 
         public static int PlotModeSelection()
         {
             Console.WriteLine("\nWhich part of the plot do you want to work on?");
@@ -143,64 +104,39 @@ namespace StoryOrganizer
             return text;
         }
 
+        public static void CollectGenres(Story story)
+        {
+            bool isTheWriterDonePicking = false;
+           
+            while (!isTheWriterDonePicking)
+            {
+                Genre selectedGenre = SelectFromEnum<Genre>("Choose a genre");
+                if (selectedGenre == Genre.Unknown || story.Genres.Contains(selectedGenre))
+                {
+                    Console.WriteLine($"{selectedGenre} has Already been picked or Choose a real genre");
+                    
+                }
+                else
+                {
+                   story.Genres.Add(selectedGenre); //add this to the pending loop
+
+                    Console.WriteLine("Add AnotherGenre?(Y/N)");
+                    isTheWriterDonePicking = ValidateUserAnswerToYesNo() == Constants._NO;
+                    
+                }
+            }
+        }
+
         public static void AskIfUserIsDoneQuestion()
         {
             Console.WriteLine("Is user Done Brainstroming?\nSelect Y/N\n");
         }
 
-        public static char UserSelectionChar()
-        {
-            char userSelection = Console.ReadKey().KeyChar;
-            return userSelection;
-        }
-
         //used to display categories to the user.
-        public static void DisplayCategories()
-        {
-            Console.WriteLine("Select your genre.");
 
-            StoryCategory.storyCategories.Add("A: fantasy");
-            StoryCategory.storyCategories.Add("B: SCI-Fi");
-            StoryCategory.storyCategories.Add("C: True Story");
-            StoryCategory.storyCategories.Add("D: Horror");
-
-            foreach (string item in StoryCategory.storyCategories)
-            {
-                Console.WriteLine(item); // creates the list is displayed to the user
-            }
-        }
 
         // this is the DisplayCategories() for the user 
-        public static char PrintWhatTheUserSelected(char userInput)
-        {
-            switch (userInput)
-            {
-                case Constants.A_SELECTION:
-                    Console.WriteLine($"You have selected : {userInput}: Fantasy");
 
-                    break;
-
-                case Constants.B_SELECTION:
-                    Console.WriteLine($"You have selected {userInput}: SCI-FI");
-
-                    break;
-
-                case Constants.C_SELECTION:
-                    Console.WriteLine($"You have selected {userInput}: True Story");
-
-                    break;
-                case Constants.D_SELECTION:
-                    Console.WriteLine($"You have selected {userInput}: Horror");
-
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid selection.");
-
-                    break;
-            }
-            return userInput;
-        }
 
         //BrainDumpManager accessUserIdeaList = new BrainDumpManager(); // object of BrainDumpManager
         //BrainStormDump IdeaDump = new BrainStormDump(); //object of BrainStormDump
@@ -340,10 +276,10 @@ namespace StoryOrganizer
             Console.WriteLine(question);
             for (int i = 0; i < options.Length; i++)
             {
-                Console.WriteLine($"{i}: {options[i]}");
+                Console.WriteLine($"{i}: {options[i]}"); // this is for to lable the enum with numbers 
             }
 
-            int choice;
+            int choice; // user inputs their choice
             while (!int.TryParse(Console.ReadLine(), out choice) || choice < 0 || choice >= options.Length)
             {
                 Console.WriteLine($"This is not a valid selection. Please enter a number from 0 to {options.Length - 1}.");
