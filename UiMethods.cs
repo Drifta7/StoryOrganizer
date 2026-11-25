@@ -43,7 +43,17 @@
             }
             return UserInput;
         }
-
+        public static string AskForText(string question)
+        {
+            Console.WriteLine("Type in a question.\n");
+            string? UserInput = Console.ReadLine();
+            while (string.IsNullOrEmpty(UserInput))
+            {
+                Console.WriteLine(" blank or empty space will not suffice please, enter a question");
+                UserInput = Console.ReadLine();
+            }
+            return UserInput;
+        }
         public static void ClearUserEntry()
         {
             Console.Clear();
@@ -54,7 +64,7 @@
             string? UserAnswer = Console.ReadLine() ?? string.Empty;
             return UserAnswer;
         }
-       
+
         public static char ValidateUserAnswerToYesNo()
         {
             bool isUserAnsEitherYOrN = false;
@@ -107,22 +117,22 @@
         public static void CollectGenres(Story story)
         {
             bool isTheWriterDonePicking = false;
-           
+
             while (!isTheWriterDonePicking)
             {
                 Genre selectedGenre = SelectFromEnum<Genre>("Choose a genre");
                 if (selectedGenre == Genre.Unknown || story.Genres.Contains(selectedGenre))
                 {
                     Console.WriteLine($"{selectedGenre} has Already been picked or Choose a real genre");
-                    
+
                 }
                 else
                 {
-                   story.Genres.Add(selectedGenre); //add this to the pending loop
+                    story.Genres.Add(selectedGenre); //add this to the pending loop
 
                     Console.WriteLine("Add AnotherGenre?(Y/N)");
                     isTheWriterDonePicking = ValidateUserAnswerToYesNo() == Constants._NO;
-                    
+
                 }
             }
         }
